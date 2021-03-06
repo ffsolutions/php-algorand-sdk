@@ -60,8 +60,8 @@ Verified on macOS Big Sur 11.2.2 and Ubuntu 20.04
 For other cases, follow the instructions in Algorand's [developer resources](https://developer.algorand.org/docs/run-a-node/setup/install/) to install a node on your computer.
 
 ### Steps:
-1- Installing Algorand Node
-2- Installing and Using the **PHP Algorand SDK**
+- 1- Installing Algorand Node
+- 2- Installing and Using the **PHP Algorand SDK**
 
 
 ### For macOS only, for Linux skip this step.
