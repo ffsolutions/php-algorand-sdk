@@ -386,6 +386,8 @@ $return=$algorand->get("v1","transactions","fee");
 ### Get an information of a single transaction.
 ```php
 $return=$algorand->get("v1","transaction","{txid}"); //start the algorand-indexer to run
+```
+
 
 ### Broadcasts a raw transaction to the network.
 Generate and Sign the transaction:
