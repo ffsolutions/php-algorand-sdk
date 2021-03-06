@@ -52,7 +52,7 @@ print_r($return);
 (see all avaliable functions in **indexer.php**)
 
 
-## Complete Guide (Coming soon video)
+## Complete Guide
 
 ### Node setup (macOS and Linux)
 Verified on macOS Big Sur 11.2.2 and Ubuntu 20.04
