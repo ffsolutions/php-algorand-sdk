@@ -65,14 +65,14 @@ For other cases, follow the instructions in Algorand's [developer resources](htt
 
 
 ### For macOS only, for Linux skip this step.
-#### Intall Homebrew (https://brew.sh/)
+#### Install Homebrew (https://brew.sh/)
 
 Paste that in a macOS Terminal or Linux shell prompt. The script explains what it will do and then pauses before it does it.
 ```
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 $ brew install wget
-$ brew install htop
 $ brew install git
+$ brew install htop
 ```
 
 
@@ -112,9 +112,9 @@ Create and change the config.json
 ```
 $ cp data/config.json.example data/config.json
 $ chmod 777 data/config.json
-$ cp data/kmd-v0.5/kmd_config.json.example data/kmd-v{version}/kmd_config.json
+$ cp data/kmd-v{version}/kmd_config.json.example data/kmd-v{version}/kmd_config.json
 $ chmod 777 data/kmd-v{version}/kmd_config.json
-$ vim data/config.json AND vim data/kmd-v{version}/kmd_config.json
+$ vim data/config.json
 ```
 
 

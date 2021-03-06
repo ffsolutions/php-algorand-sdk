@@ -31,7 +31,7 @@ $return=$algorand_kmd->post("v1","wallet",$params);
 //$return=$algorand_kmd->get("v1","wallets");
 
 #Wallet Init
-
+/*
 $params['params']=array(
     "wallet_id" => "4596a5cb20ccbedcec668762449363c1",
     "wallet_password" => "testes",
@@ -39,7 +39,7 @@ $params['params']=array(
 $return=$algorand_kmd->post("v1","wallet","init",$params);
 $return_array=json_decode($return['response']);
 $wallet_handle_token=$return_array->wallet_handle_token;
-
+*/
 
 #Wallet Info
 /*
