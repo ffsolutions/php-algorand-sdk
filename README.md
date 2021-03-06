@@ -72,6 +72,7 @@ Paste that in a macOS Terminal or Linux shell prompt. The script explains what i
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 $ brew install wget
 $ brew install htop
+$ brew install git
 ```
 
 
