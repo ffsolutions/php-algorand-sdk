@@ -389,10 +389,10 @@ $return=$algorand->get("v1","transaction","{txid}"); //start the algorand-indexe
 
 ### Broadcasts a raw transaction to the network.
 Generate and Sign the transaction:
-````
+```
 $ ./goal clerk send -a 1000 -f DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4 -t IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU -d data -o transactions/tran.txn
 $ ./goal clerk sign --infile="trans/tran.txn" --outfile="trans/tran.stxn" -d data
-````
+```
 
 ```php
 $params['file']="t1.stxn";
