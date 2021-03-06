@@ -1,4 +1,4 @@
-# PHP Algorand SDK (REST APIs algod, kmd and indexer)
+# PHP Algorand SDK (algod, kmd and indexer)
 
 All files in this directory will show you about the best pratices that you should do when implementing  **php-algorand-sdk** into your project.
 
