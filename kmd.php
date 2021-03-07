@@ -4,7 +4,7 @@
 
 require_once 'sdk/algorand.php';
 
-$algorand_kmd = new Algorand_kmd('{kmd-token}',"localhost",64212); //get the token key in data/kmd-{version}/kmd.token
+$algorand_kmd = new Algorand_kmd('{kmd-token}',"localhost",64212); //get the token key in data/kmd-{version}/kmd.token and port in data/kmd-{version}/kmd.net
 
 $algorand_kmd->debug(1);
 //algorand->setSSL('/home/felipe/certificate.cert'); //Optional

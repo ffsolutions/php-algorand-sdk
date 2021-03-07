@@ -27,7 +27,7 @@ require_once 'sdk/algorand.php';
 
 For use the **algod**:
 ```php
-$algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.token
+$algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.admin.token
 $return=$algorand->get("v2","status");
 print_r($return);
 ```
@@ -43,7 +43,7 @@ print_r($return);
 (see all avaliable functions in **kmd.php**)
 
 
-For use the **indexer**: 
+For use the **indexer**:
 ```php
 $algorand_indexer = new Algorand_indexer('{algorand-indexer-token}',"localhost",8089);
 $return=$algorand_indexer->get("health");
@@ -102,7 +102,7 @@ $ ./update.sh -i -c stable -p ~/node -d ~/node/data -n
 ```
 
 
-For Apple Silicon (Mac M1) users: 
+For Apple Silicon (Mac M1) users:
 ```
 $ arch -x86_64 ./update.sh -i -c stable -p ~/node -d ~/node/data -n
 ```
@@ -126,7 +126,7 @@ to
 ```
 
 
-Start Node: 
+Start Node:
 ```
 ./goal node start -d data
 ./goal kmd start -d data
@@ -143,7 +143,7 @@ Press F10 to close the htop
 
 
 ### Sync Node Network using Fast Catchup
-Fast Catchup is a new feature and will rapidly update a node using catchpoint snapshots. A new command on goal node is now available for catchup. The entire process should sync a node in minutes rather than hours or days. 
+Fast Catchup is a new feature and will rapidly update a node using catchpoint snapshots. A new command on goal node is now available for catchup. The entire process should sync a node in minutes rather than hours or days.
 
 
 ### Get the catchpoint
@@ -158,11 +158,11 @@ Use the sync point captured above and paste into the catchup option
 ```
 
 
-Node Status: 
+Node Status:
 ``
 ./goal node status -d data
 ``
-Results should show 5 Catchpoint status lines for Catchpoint, total accounts, accounts processed, total blocks , downloaded blocks. 
+Results should show 5 Catchpoint status lines for Catchpoint, total accounts, accounts processed, total blocks , downloaded blocks.
 Notice that the 5 Catchpoint status lines will disappear when completed, and then only a few more minutes are needed so sync from that point to the current block. ***Once there is a Sync Time of 0, the node is synced and if fully usable***.
 ```
 Last committed block: 11494
@@ -197,7 +197,7 @@ require_once 'sdk/algorand.php';
 ```
 
 
-## For use the **algod**: 
+## For use the **algod**:
 Start the SDK
 ```php
 $algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.token
@@ -320,13 +320,13 @@ $return=$algorand->get("v2","blocks",12385287);
 ### Starts a catchpoint catchup. For the last catchpoint access: https:```
 algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint
 ```php
-$return=$algorand->post("v2","catchup","{catchpoint}");
+$return=$algorand->post("v2","catchup",urlencode("{catchpoint}"));
 ```
 
 
 ### Aborts a catchpoint catchup.
 ```php
-$return=$algorand->delete("v2","catchup","{catchpoint}");
+$return=$algorand->delete("v2","catchup",urlencode("{catchpoint}"));
 ```
 
 
@@ -690,7 +690,7 @@ $return=$algorand_kmd->post("v1","transaction","sign",$params);
 For more details: https://developer.algorand.org/docs/reference/rest-apis/kmd/
 
 
-## For use the **indexer**: 
+## For use the **indexer**:
 Start the SDK
 ```php
 $algorand_indexer = new Algorand_indexer('{algorand-indexer-token}',"localhost",8089);

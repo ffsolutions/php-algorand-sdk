@@ -4,7 +4,7 @@
 
 require_once 'sdk/algorand.php';
 
-$algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.token
+$algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.admin.token
 
 $algorand->debug(1);
 
@@ -71,10 +71,10 @@ $return=$algorand->get("v2","status");
 //$return=$algorand->get("v2","blocks",12385287);
 
 #Starts a catchpoint catchup. For the last catchpoint access: https://algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint
-//$return=$algorand->post("v2","catchup","{catchpoint}");
+//$return=$algorand->post("v2","catchup",urlencode("{catchpoint}"));
 
 #Aborts a catchpoint catchup.
-//$return=$algorand->delete("v2","catchup","{catchpoint}");
+//$return=$algorand->delete("v2","catchup",urlencode("{catchpoint}"));
 
 #Get the current supply reported by the ledger.
 //$return=$algorand->get("v2","ledger","supply");
