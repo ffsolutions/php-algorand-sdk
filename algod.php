@@ -37,12 +37,6 @@ $return=$algorand->get("v2","status");
 #Check your balance.
 //$return=$algorand->get("v1","account","{address}");
 
-#Get health, Returns 200 if healthy.
-//$return=$algorand_indexer->get("health");
-
-#Return metrics about algod functioning.
-//$return=$algorand->get("metrics");
-
 #Get a specific confirmed transaction.
 //$return=$algorand->get("v1","account","{address}","transaction","{txid}");
 

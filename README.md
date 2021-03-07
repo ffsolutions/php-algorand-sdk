@@ -250,19 +250,6 @@ $return=$algorand->get("swagger.json");
 $return=$algorand->get("v1","account","{address}");
 ```
 
-
-### Get health, Returns 200 if healthy.
-```php
-$return=$algorand_indexer->get("health");
-```
-
-
-### Return metrics about algod functioning.
-```php
-$return=$algorand->get("metrics");
-```
-
-
 ### Get a specific confirmed transaction.
 ```php
 $return=$algorand->get("v1","account","{address}","transaction","{txid}");
