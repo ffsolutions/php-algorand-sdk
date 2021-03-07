@@ -52,6 +52,12 @@ print_r($return);
 (see all avaliable functions in **indexer.php**)
 
 
+## Vídeo Tutorial
+
+[![PHP Algorand SDK Vídeo Tutorial](https://img.youtube.com/vi/7ZoDY6av1-4/0.jpg)](https://www.youtube.com/watch?v=7ZoDY6av1-4)
+
+https://www.youtube.com/watch?v=7ZoDY6av1-4
+
 ## Complete Guide
 
 ### Node setup (macOS and Linux)
