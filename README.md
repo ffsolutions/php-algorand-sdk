@@ -310,8 +310,10 @@ $return=$algorand->get("v2","blocks",12385287);
 ```
 
 
-### Starts a catchpoint catchup. For the last catchpoint access: https:```
-algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint
+### Starts a catchpoint catchup. For the last catchpoint access: 
+
+https://algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint
+
 ```php
 $return=$algorand->post("v2","catchup",urlencode("{catchpoint}"));
 ```
@@ -385,6 +387,7 @@ $return=$algorand->get("v1","transaction","{txid}"); //start the algorand-indexe
 
 ### Broadcasts a raw transaction to the network.
 Generate and Sign the transaction:
+
 ```
 $ ./goal clerk send -a 1000 -f DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4 -t IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU -d data -o transactions/tran.txn
 $ ./goal clerk sign --infile="trans/tran.txn" --outfile="trans/tran.stxn" -d data
