@@ -600,7 +600,7 @@ $return=$algorand_kmd->post("v1","multisig","list",$params);
 ```
 
 
-#### Sign a multisig transaction {Under construction}
+#### Sign a multisig transaction
 ```php
 $params['params']=array(
     "partial_multisig" => array(
@@ -621,7 +621,7 @@ $return=$algorand_kmd->post("v1","multisig","sign",$params);
 ```
 
 
-#### Sign a program for a multisig account {Under construction}
+#### Sign a program for a multisig account
 ```php
 $params['params']=array(
     "address" => "",
@@ -642,7 +642,7 @@ $return=$algorand_kmd->post("v1","multisig","signprogram",$params);
 ```
 
 
-#### Sign program {Under construction}
+#### Sign program
 ```php
 $params['params']=array(
     "address" => "",
@@ -654,7 +654,7 @@ $return=$algorand_kmd->post("v1","program","sign",$params);
 ```
 
 
-#### Sign a transaction {Under construction}
+#### Sign a transaction
 ```php
 $transaction=array(
         "txn" => array(
