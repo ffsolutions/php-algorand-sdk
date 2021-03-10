@@ -616,7 +616,7 @@ $params['params']=array(
                           ),
     "public_key" => array(''),
     "signer" => array(''),
-    "transaction" => "", // Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
+    "transaction" => "", 
     "wallet_handle_token" => $wallet_handle_token,
     "wallet_password" => "testes"
 );
@@ -628,7 +628,7 @@ $return=$algorand_kmd->post("v1","multisig","sign",$params);
 ```php
 $params['params']=array(
     "address" => "",
-    "data" => "", //Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
+    "data" => "", 
     "partial_multisig" => array(
                                 "Subsigs" => array(
                                                     "Key" => array(),
@@ -649,7 +649,7 @@ $return=$algorand_kmd->post("v1","multisig","signprogram",$params);
 ```php
 $params['params']=array(
     "address" => "",
-    "data" => "", //Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
+    "data" => "", 
     "wallet_handle_token" => $wallet_handle_token,
     "wallet_password" => "testes"
 );
@@ -674,8 +674,7 @@ $transaction=array(
             ),
 );
 $params['params']=array(
-   //public_key = array(''), //Opcional
-   "transaction" => $algorand_kmd->txn_encode($transaction),  //Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
+   "transaction" => $algorand_kmd->txn_encode($transaction),  
    "wallet_handle_token" => $wallet_handle_token,
    "wallet_password" => "testes"
 );
