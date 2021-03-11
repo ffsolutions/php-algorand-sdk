@@ -4,7 +4,7 @@ All files in this directory will show you about the best pratices that you shoul
 
 
 ## Requirements
-- PHP 5.3 and above.
+- PHP 7.2 and above, include 8.x.
 - Built-in libcurl support.
 
 
