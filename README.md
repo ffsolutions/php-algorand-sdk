@@ -4,7 +4,7 @@ All files in this directory will show you about the best pratices that you shoul
 
 
 ## Requirements
-- PHP 7.2 and above, include 8.x.
+- PHP 7.2 and above.
 - Built-in libcurl support.
 
 
@@ -310,10 +310,8 @@ $return=$algorand->get("v2","blocks",12385287);
 ```
 
 
-### Starts a catchpoint catchup. For the last catchpoint access: 
-
-https://algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint
-
+### Starts a catchpoint catchup. For the last catchpoint access: https:```
+algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint
 ```php
 $return=$algorand->post("v2","catchup",urlencode("{catchpoint}"));
 ```
@@ -388,13 +386,56 @@ $return=$algorand->get("v1","transaction","{txid}"); //start the algorand-indexe
 ### Broadcasts a raw transaction to the network.
 Generate and Sign the transaction:
 
+#### With PHP Algorand SDK
+
+Payment Transaction
+```php
+$transaction=array(
+        "txn" => array(
+                "fee" => 1000, //Fee
+                "fv" => 12581127, //First Valid
+                "gen" => "mainnet-v1.0", // GenesisID
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "lv" => 12582127, //Last Valid
+                "note" => "Testes", //You note
+              //  "gp" => "", //Group
+              //  "lx" => "", //Lease
+              //  "rekey" => "", //Rekey To
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "type" => "pay", //Tx Type
+                "rcv" => "IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU", //Receiver
+                "amt" => 1000, //Amount
+              //  "close" => "", //Close Remainder To
+            ),
+);
+
+$params['params']=array(
+   "transaction" => $algorand_kmd->txn_encode($transaction),
+   "wallet_handle_token" => $wallet_handle_token,
+   "wallet_password" => "testes"
+);
+
+$return=$algorand_kmd->post("v1","transaction","sign",$params);
+$r=json_decode($return['response']);
+$txn=base64_decode($r->signed_transaction);
+```
+
+Broadcasts a raw transaction to the network.
+```php
+$algorand = new Algorand_algod('{algod-token}',"localhost",53898);
+$params['transaction']=$txn;
+$return=$algorand->post("v2","transactions",$params);
+```
+
+
+#### With goal
 ```
 $ ./goal clerk send -a 1000 -f DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4 -t IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU -d data -o transactions/tran.txn
-$ ./goal clerk sign --infile="trans/tran.txn" --outfile="trans/tran.stxn" -d data
+$ ./goal clerk sign --infile="transactions/tran.txn" --outfile="transactions/tran.stxn" -d data
 ```
 
 ```php
-$params['file']="t1.stxn";
+$params['file']="transactions/tran.stxn";
 $return=$algorand->post("v2","transactions",$params);
 ```
 
@@ -674,7 +715,8 @@ $transaction=array(
             ),
 );
 $params['params']=array(
-   "transaction" => $algorand_kmd->txn_encode($transaction),  
+   //public_key = array(''), //Opcional
+   "transaction" => $algorand_kmd->txn_encode($transaction),  //Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
    "wallet_handle_token" => $wallet_handle_token,
    "wallet_password" => "testes"
 );

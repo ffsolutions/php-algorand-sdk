@@ -1,7 +1,4 @@
 <?php
-#References
-#https://developer.algorand.org/docs/reference/rest-apis/indexer/
-
 require_once 'sdk/algorand.php';
 
 $algorand_indexer = new Algorand_indexer('{algorand-indexer-token}',"localhost",8089);

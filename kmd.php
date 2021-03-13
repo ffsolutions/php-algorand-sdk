@@ -1,10 +1,8 @@
 <?php
-#References
-#https://developer.algorand.org/docs/reference/rest-apis/kmd/
-
 require_once 'sdk/algorand.php';
 
 $algorand_kmd = new Algorand_kmd('{kmd-token}',"localhost",64212); //get the token key in data/kmd-{version}/kmd.token and port in data/kmd-{version}/kmd.net
+
 
 $algorand_kmd->debug(1);
 //algorand->setSSL('/home/felipe/certificate.cert'); //Optional
@@ -167,7 +165,7 @@ $params['params']=array(
 $return=$algorand_kmd->post("v1","multisig","list",$params);
 */
 
-#Sign a multisig transaction {Under construction}
+#Sign a multisig transaction
 /*
 $params['params']=array(
     "partial_multisig" => array(
@@ -180,7 +178,7 @@ $params['params']=array(
                           ),
     "public_key" => array(''),
     "signer" => array(''),
-    "transaction" => "", // Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
+    "transaction" => $algorand_kmd->txn_encode(""),
     "wallet_handle_token" => $wallet_handle_token,
     "wallet_password" => "testes"
 );
@@ -188,11 +186,11 @@ $return=$algorand_kmd->post("v1","multisig","sign",$params);
 */
 
 
-#Sign a program for a multisig account  {Under construction}
+#Sign a program for a multisig account
 /*
 $params['params']=array(
     "address" => "",
-    "data" => "", //Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
+    "data" => $algorand_kmd->txn_encode(""),
     "partial_multisig" => array(
                                 "Subsigs" => array(
                                                     "Key" => array(),
@@ -209,11 +207,12 @@ $return=$algorand_kmd->post("v1","multisig","signprogram",$params);
 */
 
 
-#Sign program  {Under construction}
+#Sign program
+
 /*
 $params['params']=array(
     "address" => "",
-    "data" => "", //Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
+    "data" => $algorand_kmd->txn_encode(""),
     "wallet_handle_token" => $wallet_handle_token,
     "wallet_password" => "testes"
 );
@@ -222,32 +221,49 @@ $return=$algorand_kmd->post("v1","program","sign",$params);
 
 #Tip, use algod $return=$algorand->get("v2","transactions","params"); to get parameters for constructing a new transaction
 
-#Sign a transaction, for details: https://developer.algorand.org/docs/features/transactions  {Coming soon with a simplified version}
+#Sign a transaction, for details and other types: https://developer.algorand.org/docs/features/transactions
+
+#Payment Transaction
 /*
 $transaction=array(
         "txn" => array(
-                "amt" => 1000, //Amount
                 "fee" => 1000, //Fee
-                "fv" => 12435315, //FirstValid
+                "fv" => 12581127, //First Valid
                 "gen" => "mainnet-v1.0", // GenesisID
-                "gh" => "wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=", //GenesisHash
-                "lv" => 12437315, //LastValid
-                "note" => "Test", //You note
-                "rcv" => "XEVVHLG63NUNHSSXAKFPSUOUILJ7C22AFDTTEU2IPDBYERS2FFY5U6YCLM", //Receiver
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "lv" => 12582127, //Last Valid
+                "note" => "Testes", //You note
+              //  "gp" => "", //Group
+              //  "lx" => "", //Lease
+              //  "rekey" => "", //Rekey To
                 "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
-                "type" => "pay" //TxType
+                "type" => "pay", //Tx Type
+                "rcv" => "IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU", //Receiver
+                "amt" => 1000, //Amount
+              //  "close" => "", //Close Remainder To
             ),
 );
+
 $params['params']=array(
-   //public_key = array(''), //Opcional
-   "transaction" => $algorand_kmd->txn_encode($transaction),  //Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
+   "transaction" => $algorand_kmd->txn_encode($transaction),
    "wallet_handle_token" => $wallet_handle_token,
    "wallet_password" => "testes"
 );
+
 $return=$algorand_kmd->post("v1","transaction","sign",$params);
+$r=json_decode($return['response']);
+$txn=base64_decode($r->signed_transaction);
+
 */
 
-
+#Broadcasts a raw transaction to the network from /v1/transaction/sign.
+/*
+$algorand = new Algorand_algod('4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7',"localhost",53898);
+$params['transaction']=$txn;
+$return=$algorand->post("v2","transactions",$params);
+$txId=$return['response']->txId;
+echo "txId: $txId";
+*/
 
 #Full response with debug (json response)
 print_r($return);

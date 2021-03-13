@@ -1,17 +1,14 @@
 <?php
-#References
-#https://developer.algorand.org/docs/reference/rest-apis/algod/
-
 require_once 'sdk/algorand.php';
 
-$algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.admin.token
+$algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.token
+
 
 $algorand->debug(1);
 
 //algorand->setSSL('/home/felipe/certificate.cert'); //Optional
 
 #Just uncomment to try all avaliable functions
-
 
 #Get the versions
 //$return=$algorand->get("versions");
@@ -36,6 +33,12 @@ $return=$algorand->get("v2","status");
 
 #Check your balance.
 //$return=$algorand->get("v1","account","{address}");
+
+#Get health, Returns 200 if healthy.
+//$return=$algorand_indexer->get("health");
+
+#Return metrics about algod functioning.
+//$return=$algorand->get("metrics");
 
 #Get a specific confirmed transaction.
 //$return=$algorand->get("v1","account","{address}","transaction","{txid}");
@@ -65,10 +68,10 @@ $return=$algorand->get("v2","status");
 //$return=$algorand->get("v2","blocks",12385287);
 
 #Starts a catchpoint catchup. For the last catchpoint access: https://algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint
-//$return=$algorand->post("v2","catchup",urlencode("{catchpoint}"));
+//$return=$algorand->post("v2","catchup","{catchpoint}");
 
 #Aborts a catchpoint catchup.
-//$return=$algorand->delete("v2","catchup",urlencode("{catchpoint}"));
+//$return=$algorand->delete("v2","catchup","{catchpoint}");
 
 #Get the current supply reported by the ledger.
 //$return=$algorand->get("v2","ledger","supply");
@@ -120,10 +123,11 @@ $return=$algorand->post("v2","teal","dryrun",$params);
 #Broadcasts a raw transaction to the network.
 #Generate and Sign the transaction:
 #./goal clerk send -a 1000 -f DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4 -t IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU -d data -o transactions/tran.txn
-#./goal clerk sign --infile="transactions/tran.txn" --outfile="transactions/tran.stxn" -d data
+#./goal clerk sign --infile="trans/tran.txn" --outfile="trans/tran.stxn" -d data
 
 /*
-$params['file']="transactions/tran.stxn";
+$params['file']="transactions/tran.stxn"; //Trasaction from files
+//$params['transaction']=""; //Or encoded transactions
 $return=$algorand->post("v2","transactions",$params);
 */
 
