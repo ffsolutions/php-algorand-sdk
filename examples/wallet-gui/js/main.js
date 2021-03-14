@@ -196,22 +196,3 @@ class Wallet {
 
 
 }
-
-
-function get_data(id){
-  var url="";
-  $.post(url, {
-        campo: "",
-      }).done(function( data ) {
-        alert( "Data Loaded: " + data );
-      });
-}
-
-function get_json(id){
-	var url="";
-		$.getJSON(url, function(data){
-			$.each(data, function(index,itemx) {
-        $("#select").append('<option value="' + itemx.value + '">' + itemx.name + '</option>');
-			});
-		});
-}
