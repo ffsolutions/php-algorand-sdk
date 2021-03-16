@@ -1,5 +1,7 @@
 # PHP Algorand SDK (algod, kmd and indexer)
 
+A PHP library for interacting with the Algorand network.
+
 All files in this directory will show you about the best pratices that you should do when implementing  **php-algorand-sdk** into your project.
 
 
