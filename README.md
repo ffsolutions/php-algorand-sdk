@@ -66,6 +66,7 @@ See at examples folder.
 ![Algorand Wallet PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/wallet-gui/preview.png "Algorand Wallet PHP GUI")
 https://www.youtube.com/watch?v=Ju1f5MrwJKA
 
+
 ## Complete Guide
 
 ### Node setup (macOS and Linux)
