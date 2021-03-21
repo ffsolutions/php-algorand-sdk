@@ -725,7 +725,7 @@ $transaction=array(
 );
 $params['params']=array(
    //public_key = array(''), //Opcional
-   "transaction" => $algorand_kmd->txn_encode($transaction),  //Pattern : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==\|[A-Za-z0-9+/]{3}=)?$"
+   "transaction" => $algorand_kmd->txn_encode($transaction), 
    "wallet_handle_token" => $wallet_handle_token,
    "wallet_password" => "testes"
 );
