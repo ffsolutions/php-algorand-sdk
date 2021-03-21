@@ -928,6 +928,6 @@ php-algorand-sdk is licensed under a MIT license. See the [LICENSE](https://gith
 
 
 ## Donate
-If you would like to donate to help maintain our online participation node, this and future projects, this is our ALGO (Algorand) Wallet: IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU
+If you would like to donate to help maintain our online nodes, this and future projects, this is our ALGO (Algorand) Wallet: IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU
 
 Thank you!
