@@ -66,7 +66,6 @@ See at examples folder.
 ![Algorand Wallet PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/wallet-gui/preview.png "Algorand Wallet PHP GUI")
 https://www.youtube.com/watch?v=Ju1f5MrwJKA
 
-
 ## Complete Guide
 
 ### Node setup (macOS and Linux)
@@ -319,8 +318,8 @@ $return=$algorand->get("v2","blocks",12385287);
 ```
 
 
-### Starts a catchpoint catchup. For the last catchpoint access: https:```
-algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint
+### Starts a catchpoint catchup. For the last catchpoint access:
+https://algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint
 ```php
 $return=$algorand->post("v2","catchup",urlencode("{catchpoint}"));
 ```
@@ -410,9 +409,9 @@ $transaction=array(
               //  "gp" => "", //Group
               //  "lx" => "", //Lease
               //  "rekey" => "", //Rekey To
-                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "snd" => "{sender-address}", //Sender
                 "type" => "pay", //Tx Type
-                "rcv" => "IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU", //Receiver
+                "rcv" => "{receive-address}", //Receiver
                 "amt" => 1000, //Amount
               //  "close" => "", //Close Remainder To
             ),
@@ -439,7 +438,7 @@ $return=$algorand->post("v2","transactions",$params);
 
 #### With goal
 ```
-$ ./goal clerk send -a 1000 -f DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4 -t IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU -d data -o transactions/tran.txn
+$ ./goal clerk send -a 1000 -f {sender-address} -t {receive-address} -d data -o transactions/tran.txn
 $ ./goal clerk sign --infile="transactions/tran.txn" --outfile="transactions/tran.stxn" -d data
 ```
 
@@ -488,8 +487,8 @@ $return=$algorand_kmd->get("swagger.json");
 #### Create Wallet
 ```php
 $params['params']=array(
-    "wallet_name" => "Carteira1",
-    "wallet_password" => "testes",
+    "wallet_name" => "",
+    "wallet_password" => "",
     "wallet_driver_name" => "sqlite",
 );
 $return=$algorand_kmd->post("v1","wallet",$params);
@@ -503,8 +502,8 @@ $return=$algorand_kmd->get("v1","wallets");
 #### Wallet Init
 ```php
 $params['params']=array(
-    "wallet_id" => "4596a5cb20ccbedcec668762449363c1",
-    "wallet_password" => "testes",
+    "wallet_id" => "",
+    "wallet_password" => "",
 );
 $return=$algorand_kmd->post("v1","wallet","init",$params);
 $return_array=json_decode($return['response']);
@@ -524,9 +523,9 @@ $return=$algorand_kmd->post("v1","wallet","info",$params);
 #### Wallet Rename
 ```php
 $params['params']=array(
-    "wallet_id" => "4596a5cb20ccbedcec668762449363c1",
-    "wallet_name" => "Carteira 1",
-    "wallet_password" => "testes",
+    "wallet_id" => "",
+    "wallet_name" => "",
+    "wallet_password" => "",
 );
 $return=$algorand_kmd->post("v1","wallet","rename",$params);
 ```
@@ -563,9 +562,9 @@ $return=$algorand_kmd->post("v1","key",$params);
 #### Delete a key
 ```php
 $params['params']=array(
-    "address" => "HNVCPPGOW2SC2YVDVDICU3YNONSTEFLXDXREHJR2YBEKDC2Z3IUZSC6YGI",
+    "address" => "",
     "wallet_handle_token" => $wallet_handle_token,
-    "wallet_password" => "testes"
+    "wallet_password" => ""
 );
 $return=$algorand_kmd->delete("v1","key",$params);
 ```
@@ -574,8 +573,8 @@ $return=$algorand_kmd->delete("v1","key",$params);
 #### Export a key
 ```php
 $params['params']=array(
-    "address" => "XI56XZXQ64QD7IO5UBRC2RBZP6TQHP5WEILLFMBTKPXRKK7343R3KZAWNQ",
-    "wallet_password" => "testes",
+    "address" => "",
+    "wallet_password" => "",
     "wallet_handle_token" => $wallet_handle_token
 );
 $return=$algorand_kmd->post("v1","key","export",$params);
@@ -585,7 +584,7 @@ $return=$algorand_kmd->post("v1","key","export",$params);
 #### Import a key
 ```php
 $params['params']=array(
-    "private_key" => "eGTs9KCLHSUcf2JUIUV7EIkjH2dQQX3AyeGUDZ7MfM26O+vm8PcgP6HdoGItRDl/pwO/tiIWsrAzU+8VK/vm4w==",
+    "private_key" => "",
     "wallet_handle_token" => $wallet_handle_token
 );
 $return=$algorand_kmd->post("v1","key","import",$params);
@@ -614,7 +613,7 @@ $return=$algorand_kmd->post("v1","master-key","export",$params);
 #### Delete a multisig
 ```php
 $params['params']=array(
-    "address" => "HNVCPPGOW2SC2YVDVDICU3YNONSTEFLXDXREHJR2YBEKDC2Z3IUZSC6YGI",
+    "address" => "",
     "wallet_handle_token" => $wallet_handle_token,
     "wallet_password" => "testes"
 );
@@ -625,7 +624,7 @@ $return=$algorand_kmd->delete("v1","multisig",$params);
 #### Export a multisig
 ```php
 $params['params']=array(
-    "address" => "E6VH3C5XX57PT7LSZBETCJJRJRPZPSWAY5TEB7AWGEAQAWLCSM66TRULT4",
+    "address" => "",
     "wallet_handle_token" => $wallet_handle_token
 );
 $return=$algorand_kmd->post("v1","multisig","export",$params);
@@ -636,7 +635,7 @@ $return=$algorand_kmd->post("v1","multisig","export",$params);
 ```php
 $params['params']=array(
     "multisig_version" => "1",
-    "pks" => array('eGTs9KCLHSUcf2JUIUV7EIkjH2dQQX3AyeGUDZ7MfM26O+vm8PcgP6HdoGItRDl/pwO/tiIWsrAzU+8VK/vm4w=='),
+    "pks" => array(''),
     "threshold" => 1,
     "wallet_handle_token" => $wallet_handle_token
 );
@@ -666,7 +665,7 @@ $params['params']=array(
                           ),
     "public_key" => array(''),
     "signer" => array(''),
-    "transaction" => "", 
+    "transaction" => "",
     "wallet_handle_token" => $wallet_handle_token,
     "wallet_password" => "testes"
 );
@@ -678,7 +677,7 @@ $return=$algorand_kmd->post("v1","multisig","sign",$params);
 ```php
 $params['params']=array(
     "address" => "",
-    "data" => "", 
+    "data" => "",
     "partial_multisig" => array(
                                 "Subsigs" => array(
                                                     "Key" => array(),
@@ -699,7 +698,7 @@ $return=$algorand_kmd->post("v1","multisig","signprogram",$params);
 ```php
 $params['params']=array(
     "address" => "",
-    "data" => "", 
+    "data" => "",
     "wallet_handle_token" => $wallet_handle_token,
     "wallet_password" => "testes"
 );
@@ -725,7 +724,7 @@ $transaction=array(
 );
 $params['params']=array(
    //public_key = array(''), //Opcional
-   "transaction" => $algorand_kmd->txn_encode($transaction), 
+   "transaction" => $algorand_kmd->txn_encode($transaction),  
    "wallet_handle_token" => $wallet_handle_token,
    "wallet_password" => "testes"
 );
@@ -752,16 +751,16 @@ $return=$algorand_indexer->get("health");
 #### Search for accounts.
 ```php
 $query=http_build_query(array(
-    "application-id" => 0, //integer
-    "asset-id" => 0, //integer
-    "auth-addr" => "", //string
-    "currency-greater-than" => 0, //integer
-    "currency-less-than" => 0, //integer
-    "limit" => 0, //integer
-    "next" => "", //string
-    "round" => 0, //integer
+    //"application-id" => 0, //integer
+    //"asset-id" => 0, //integer
+    //"auth-addr" => "", //string
+    //"currency-greater-than" => 0, //integer
+    //"currency-less-than" => 0, //integer
+    "limit" => 100, //integer
+    //"next" => "", //string - previous return {next-token}
+    //"round" => 0, //integer
 ));
-$return=$algorand_indexer->get("v2","accounts","?".$query);
+$return=$algorand_indexer->get("v2","accounts?".$query);
 ```
 
 
@@ -773,7 +772,26 @@ $return=$algorand_indexer->get("v2","accounts","{account-id}");
 
 #### Lookup account transactions.
 ```php
-$return=$algorand_indexer->get("v2","accounts","{account-id}","transactions");
+$query=http_build_query(array(
+    //"application-id" => 0, //integer
+    "asset-id" => 0, //integer
+    "after-time" => "", //string (date-time)
+    "before-time" => "", //string (date-time)
+    "currency-greater-than" => 0, //integer
+    "currency-less-than" => 0, //integer
+    "limit" => 100, //integer
+    //"max-round" => 0, //integer
+    //"min-round" => 0, //integer
+    //"next" => "", //string - previous return {next-token}
+    "note-prefix" => "", //string
+    "rekey-to" => false, //boolean
+    //"round" => "", //integer
+    "sig-type" => "sig", //enum (sig, msig, lsig)
+    "tx-type" => "pay", //enum (pay, keyreg, acfg, axfer, afrz, appl)
+    "txid" => "", //string
+));
+
+$return=$algorand_indexer->get("v2","accounts","{account-id}","transactions?".$query);
 ```
 
 
@@ -781,10 +799,10 @@ $return=$algorand_indexer->get("v2","accounts","{account-id}","transactions");
 ```php
 $query=http_build_query(array(
     "application-id" => 0, //integer
-    "limit" => 0, //integer
-    "next" => 0, //string
+    "limit" => 100, //integer
+    //"next" => "", //string - previous return {next-token}
 ));
-$return=$algorand_indexer->get("v2","applications","?".$query);
+$return=$algorand_indexer->get("v2","applications?".$query);
 ```
 
 
@@ -797,14 +815,14 @@ $return=$algorand_indexer->get("v2","applications","{application-id}");
 #### Search for assets.
 ```php
 $query=http_build_query(array(
-    "asset-id" => 0, //integer
-    "creator" => "", //integer
-    "limit" => 0, //integer
-    "name" => "", //string
-    "next" => "", //string
-    "unit" => "", //string
+    //"asset-id" => 0, //integer
+    //"creator" => 0, //integer
+    "limit" => 100, //integer
+    //"name" => "", //string
+    //"next" => "", //string - previous return {next-token}
+    //"unit" => "", //string
 ));
-$return=$algorand_indexer->get("v2","assets","?".$query);
+$return=$algorand_indexer->get("v2","assets?".$query);
 ```
 
 
@@ -817,13 +835,13 @@ $return=$algorand_indexer->get("v2","assets","{asset-id}");
 #### Lookup the list of accounts who hold this asset
 ```php
 $query=http_build_query(array(
-    "currency-greater-than" => 0, //integer
-    "currency-less-than" => 0, //integer
-    "limit" => 0, //integer
-    "next" => "", //string
-    "round" => 0, //string
+    //"currency-greater-than" => 0, //integer
+    //"currency-less-than" => 0, //integer
+    "limit" => 100, //integer
+    //"next" => "", //string - previous return {next-token}
+    //"round" => "", //integer
 ));
-$return=$algorand_indexer->get("v2","assets","{asset-id}","balances","?".$query);
+$return=$algorand_indexer->get("v2","assets","{asset-id}","balances?".$query);
 ```
 
 
@@ -835,20 +853,20 @@ $query=http_build_query(array(
     "after-time" => "", //string (date-time)
     "before-time" => "", //string (date-time)
     "currency-greater-than" => 0, //integer
-    "currency-less-than" => 0, //integer
+    //"currency-less-than" => 0 //integer
     "exclude-close-to" => false, //boolean
-    "limit" => 0, //integer
+    "limit" => 100, //integer
     "max-round" => 0, //integer
     "min-round" => 0, //integer
-    "next" => "", //string
+    //"next" => "", //string - previous return {next-token}
     "note-prefix" => "", //string
     "rekey-to" => false, //boolean
-    "round" => 0, //integer
-    "sig-type" => "", //enum (sig, msig, lsig)
-    "tx-type" => "", //enum (pay, keyreg, acfg, axfer, afrz, appl)
+    //"round" => "", //integer
+    "sig-type" => "sig", //enum (sig, msig, lsig)
+    "tx-type" => "pay", //enum (pay, keyreg, acfg, axfer, afrz, appl)
     "txid" => "", //string
 ));
-$return=$algorand_indexer->get("v2","assets","{asset-id}","transactions","?".$query);
+$return=$algorand_indexer->get("v2","assets","{asset-id}","transactions".$query);
 ```
 
 
@@ -862,26 +880,25 @@ $return=$algorand_indexer->get("v2","blocks","{round-number}");
 ```php
 $query=http_build_query(array(
     "address" => "", //string
-    "address-role" => "", //enum (sender, receiver, freeze-target)
+    "address-role" => "sender", //enum (sender, receiver, freeze-target)
     "after-time" => "", //string (date-time)
     "application-id" => 0, //integer
     "asset-id" => 0, //integer
     "before-time" => "", //string (date-time)
     "currency-greater-than" => 0, //integer
     "currency-less-than" => 0, //integer
-    "exclude-close-to" => false, //boolean
-    "limit" => 0, //integer
-    "max-round" => 0, //integer
-    "min-round" => 0, //integer
-    "next" => "", //string
+    "exclude-close-to" => "false", //boolean
+    "limit" => "100", //integer
+    "min-round" => 2466647, //integer
+    "max-round" => 2566647, //integer
+    "next" => "", //string - previous return {next-token}
     "note-prefix" => "", //string
     "rekey-to" => false, //boolean
-    "round" => 0, //integer
-    "sig-type" => 0, //enum (sig, msig, lsig)
-    "tx-type" => 0, //enum (pay, keyreg, acfg, axfer, afrz, appl)
+    //"round" => 2566247, //integer
+    "sig-type" => "sig", //enum (sig, msig, lsig)
+    "tx-type" => "pay", //enum (pay, keyreg, acfg, axfer, afrz, appl)
     "txid" => "", //string
 ));
-$return=$algorand_indexer->get("v2","transactions","?".$query);
 ```
 
 
