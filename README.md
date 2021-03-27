@@ -308,13 +308,13 @@ $return=$algorand->get("v2","assets","{asset-id}");
 
 ### Get the block for the given round.
 ```php
-$return=$algorand->get("v1","block",12424111);
+$return=$algorand->get("v1","block","{block-number}");
 ```
 
 
 ### Get the block for the given round.
 ```php
-$return=$algorand->get("v2","blocks",12385287);
+$return=$algorand->get("v2","blocks","{block-number}");
 ```
 
 
@@ -405,7 +405,7 @@ $transaction=array(
                 "gen" => "mainnet-v1.0", // GenesisID
                 "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
                 "lv" => 12582127, //Last Valid
-                "note" => "Testes", //You note
+                "note" => "", //Your note
               //  "gp" => "", //Group
               //  "lx" => "", //Lease
               //  "rekey" => "", //Rekey To
@@ -420,7 +420,7 @@ $transaction=array(
 $params['params']=array(
    "transaction" => $algorand_kmd->txn_encode($transaction),
    "wallet_handle_token" => $wallet_handle_token,
-   "wallet_password" => "testes"
+   "wallet_password" => ""
 );
 
 $return=$algorand_kmd->post("v1","transaction","sign",$params);
@@ -603,7 +603,7 @@ $return=$algorand_kmd->post("v1","key","list",$params);
 #### Master Key export
 ```php
 $params['params']=array(
-    "wallet_password" => "testes",
+    "wallet_password" => "",
     "wallet_handle_token" => $wallet_handle_token
 );
 $return=$algorand_kmd->post("v1","master-key","export",$params);
@@ -615,7 +615,7 @@ $return=$algorand_kmd->post("v1","master-key","export",$params);
 $params['params']=array(
     "address" => "",
     "wallet_handle_token" => $wallet_handle_token,
-    "wallet_password" => "testes"
+    "wallet_password" => ""
 );
 $return=$algorand_kmd->delete("v1","multisig",$params);
 ```
@@ -667,7 +667,7 @@ $params['params']=array(
     "signer" => array(''),
     "transaction" => "",
     "wallet_handle_token" => $wallet_handle_token,
-    "wallet_password" => "testes"
+    "wallet_password" => ""
 );
 $return=$algorand_kmd->post("v1","multisig","sign",$params);
 ```
@@ -688,7 +688,7 @@ $params['params']=array(
                           ),
     "public_key" => array(''),
     "wallet_handle_token" => $wallet_handle_token,
-    "wallet_password" => "testes"
+    "wallet_password" => ""
 );
 $return=$algorand_kmd->post("v1","multisig","signprogram",$params);
 ```
@@ -700,7 +700,7 @@ $params['params']=array(
     "address" => "",
     "data" => "",
     "wallet_handle_token" => $wallet_handle_token,
-    "wallet_password" => "testes"
+    "wallet_password" => ""
 );
 $return=$algorand_kmd->post("v1","program","sign",$params);
 ```
@@ -726,7 +726,7 @@ $params['params']=array(
    //public_key = array(''), //Opcional
    "transaction" => $algorand_kmd->txn_encode($transaction),  
    "wallet_handle_token" => $wallet_handle_token,
-   "wallet_password" => "testes"
+   "wallet_password" => ""
 );
 $return=$algorand_kmd->post("v1","transaction","sign",$params);
 ```
