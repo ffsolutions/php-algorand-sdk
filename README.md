@@ -61,10 +61,13 @@ print_r($return);
 https://www.youtube.com/watch?v=7ZoDY6av1-4
 
 
-## Application Example
+## Application Examples
 See at examples folder.
 ![Algorand Wallet PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/wallet-gui/preview.png "Algorand Wallet PHP GUI")
 https://www.youtube.com/watch?v=Ju1f5MrwJKA
+
+![Algorand Explorer PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/explorer-gui/preview.png)
+https://www.youtube.com/watch?v=b__DhRzAex0
 
 ## Complete Guide
 
@@ -144,7 +147,7 @@ Start Node:
 ```
 ./goal node start -d data
 ./goal kmd start -d data
-./algorand-indexer daemon -h -d data
+./algorand-indexer daemon -P "host=127.0.0.1 port=5432 user={user} password={password} dbname=algorand sslmode=disable"  --no-algod
 ```
 
 
@@ -189,6 +192,9 @@ Genesis ID: mainnet-v1.0
 Genesis hash: wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=
 ```
 
+## Installing the Algorand Indexer
+
+For more details: https://developer.algorand.org/docs/run-a-node/setup/indexer/
 
 ## Installing and Using the Algorand PHP SDK
 Get the node tokens and address:
