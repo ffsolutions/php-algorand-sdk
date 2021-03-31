@@ -54,16 +54,16 @@ switch ($action) {
           exit();
       break;
 
-  case 'key_delete':
+  case 'key_generate':
           $wallet_token=$wallet->token($wallet_id,$wallet_password);
-          $return=$wallet->key_delete($wallet_token,$key_id,$wallet_password);
+          $return=$wallet->key_generate($wallet_token);
           echo $wallet->json_print($return['response']);
           exit();
       break;
 
-  case 'key_generate':
+  case 'key_delete':
           $wallet_token=$wallet->token($wallet_id,$wallet_password);
-          $return=$wallet->key_generate($wallet_token);
+          $return=$wallet->key_delete($wallet_token,$key_id,$wallet_password);
           echo $wallet->json_print($return['response']);
           exit();
         break;
