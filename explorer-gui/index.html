@@ -1,0 +1,65 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+<title>Algorand Explorer PHP</title>
+</head>
+
+<body>
+    <main id="explorer">
+          <h1>Algorand Explorer PHP</h1>
+          <div id="top">
+              <div id="search">
+                  <input id="keyword" type="text" value="" placeholder="Address, TX ID, Block, Asset ID, or leave blank to list">
+
+                  <input type="button" id="reload-buttom" value="<- Back | Reload">
+
+                  Type
+                  <select id="type">
+                      <option value="address">Address</option>
+                      <option value="txid">Transaction</option>
+                      <option value="block">Block</option>
+                      <option value="asset">Asset</option>
+                      <option value="application">Application</option>
+                  </select>
+
+                  Round
+                  <input id="minround" type="number" value="" placeholder="Block">
+
+                  Max Round
+                  <input id="maxround" type="number" value="" placeholder="Block">
+
+                  Limit
+                  <input id="limit" type="number" value="100">
+
+                  <input type="button" id="search-buttom" value="Search">
+
+
+              </div>
+              <div id="results">
+
+              </div>
+          </div>
+
+          <div id="left">
+              <h2>Latest Transactions</h2>
+              <div id="transactions">
+
+              </div>
+          </div>
+          <div id="right">
+              <h2>Latest Blocks</h2>
+              <div id="blocks">
+
+              </div>
+          </div>
+          <div id="bottom">
+            <h2>Output</h2>
+            <textarea id="explorer_output"></textarea>
+          </div>
+    </main>
+</body>
+</html>
