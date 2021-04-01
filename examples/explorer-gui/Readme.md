@@ -1,7 +1,7 @@
 
 ## Overview
 
-This solution describes how to use and create a Algorand Blockchain Explorer Application (WebApp GUI) with the new PHP Algorand SDK (native).
+This solution describes how to create a Algorand Blockchain Explorer Application (WebApp GUI) with the new PHP Algorand SDK (native).
 
 We use the Algorand Indexer service.
 
