@@ -454,8 +454,10 @@ class Algorand_kmd
 
         $out=$transaction;
         ksort($out['txn']);
+        
+       
 
-
+        
         if(!empty($out['txn']['fee'])) { $out['txn']['fee']=intval($out['txn']['fee']); }
         if(!empty($out['txn']['fv'])) { $out['txn']['fv']=intval($out['txn']['fv']); }
         if(!empty($out['txn']['gen'])) { $out['txn']['gen']=strval($out['txn']['gen']); }
@@ -469,11 +471,29 @@ class Algorand_kmd
         if(!empty($out['txn']['amt'])) { $out['txn']['amt']=intval($out['txn']['amt']); }
         if(!empty($out['txn']['close'])) { $out['txn']['close']=strval($out['txn']['close']); }
 
-
-        $out['txn']['gh']=b32::decode($out['txn']['gh']);
-        $out['txn']['snd']=b32::decode($out['txn']['snd']);
-        $out['txn']['rcv']=b32::decode($out['txn']['rcv']);
-
+        
+        if(!empty($out['txn']['gh'])) { $out['txn']['gh']=b32::decode($out['txn']['gh']); }
+        if(!empty($out['txn']['snd'])) { $out['txn']['snd']=b32::decode($out['txn']['snd']); }
+        if(!empty($out['txn']['rcv'])) { $out['txn']['rcv']=b32::decode($out['txn']['rcv']); }
+        if(!empty($out['txn']['close'])) { $out['txn']['close']=b32::decode($out['txn']['close']); }
+        if(!empty($out['txn']['selkey'])) { $out['txn']['selkey']=b32::decode($out['txn']['selkey']); }
+        if(!empty($out['txn']['votekey'])) { $out['txn']['votekey']=b32::decode($out['txn']['votekey']); }
+        if(!empty($out['txn']['arcv'])) { $out['txn']['arcv']=b32::decode($out['txn']['arcv']); }
+        if(!empty($out['txn']['asnd'])) { $out['txn']['asnd']=b32::decode($out['txn']['asnd']); }
+        if(!empty($out['txn']['fadd'])) { $out['txn']['fadd']=b32::decode($out['txn']['fadd']); }
+        if(!empty($out['txn']['apat'])) { $out['txn']['apat']=b32::decode($out['txn']['apat']); }
+        if(!empty($out['txn']['apap'])) { $out['txn']['apap']=b32::decode($out['txn']['apap']); }
+        if(!empty($out['txn']['apsu'])) { $out['txn']['apsu']=b32::decode($out['txn']['apsu']); }
+        if(!empty($out['txn']['apfa'])) { $out['txn']['apfa']=b32::decode($out['txn']['apfa']); }
+        if(!empty($out['txn']['apas'])) { $out['txn']['apas']=b32::decode($out['txn']['apas']); }
+       
+        if(!empty($out['txn']['apar']['am'])) { $out['txn']['apar']['am']=b32::decode($out['txn']['apar']['am']); }
+        if(!empty($out['txn']['apar']['c'])) { $out['txn']['apar']['c']=b32::decode($out['txn']['apar']['c']); }
+        if(!empty($out['txn']['apar']['f'])) { $out['txn']['apar']['f']=b32::decode($out['txn']['apar']['f']); }
+        if(!empty($out['txn']['apar']['m'])) { $out['txn']['apar']['m']=b32::decode($out['txn']['apar']['m']); }
+        if(!empty($out['txn']['apar']['r'])) { $out['txn']['apar']['r']=b32::decode($out['txn']['apar']['r']); }
+       
+        
         $out=$msgpack->p($out['txn']);
 
         $out=base64_encode($out);
@@ -525,7 +545,7 @@ class Algorand_indexer
     public $raw;
     public $response;
 
-    public function __construct($token, $host = 'localhost', $port = 8089){
+    public function __construct($token, $host = 'localhost', $port = 8980){
 
         $this->token      = $token;
         $this->host          = $host;

@@ -3,7 +3,6 @@ require_once 'sdk/algorand.php';
 
 $algorand_kmd = new Algorand_kmd('{kmd-token}',"localhost",64212); //get the token key in data/kmd-{version}/kmd.token and port in data/kmd-{version}/kmd.net
 
-
 $algorand_kmd->debug(1);
 //algorand->setSSL('/home/felipe/certificate.cert'); //Optional
 
@@ -221,29 +220,270 @@ $return=$algorand_kmd->post("v1","program","sign",$params);
 
 #Tip, use algod $return=$algorand->get("v2","transactions","params"); to get parameters for constructing a new transaction
 
-#Sign a transaction, for details and other types: https://developer.algorand.org/docs/features/transactions
 
-#Payment Transaction
+
+#Build and Sign a transaction, for details: https://developer.algorand.org/docs/features/transactions
+# Types: 
+# appl = ApplicationCallTx allows creating, deleting, and interacting with an application
+# cert = CompactCertTx records a compact certificate
+# keyreg = KeyRegistrationTx indicates a transaction that registers participation keys
+# acfg = AssetConfigTx creates, re-configures, or destroys an asset
+# axfer = AssetTransferTx transfers assets between accounts (optionally closing)
+# afrz = AssetFreezeTx changes the freeze status of an asset
+# pay = PaymentTx indicates a payment transaction
+
+#Build Transaction
+
+#Application Call Transaction
 /*
 $transaction=array(
         "txn" => array(
-                "fee" => 1000, //Fee
-                "fv" => 12581127, //First Valid
-                "gen" => "mainnet-v1.0", // GenesisID
-                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
-                "lv" => 12582127, //Last Valid
-                "note" => "Testes", //You note
-              //  "gp" => "", //Group
-              //  "lx" => "", //Lease
-              //  "rekey" => "", //Rekey To
+                "type" => "appl", //Tx Type
                 "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
-                "type" => "pay", //Tx Type
-                "rcv" => "IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU", //Receiver
-                "amt" => 1000, //Amount
-              //  "close" => "", //Close Remainder To
+                "fee" => 1000, //Fee
+                "fv" => 13029982, //First Valid
+                "lv" => 13023082, //Last Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "apid" => "", //Application ID or empty if creating
+                "apan" => "", //OnComplete
+                "apat" => "", //Accounts
+                "apap" => "", //Approval Program
+                "apaa" => "", //App Arguments
+                "apsu" => "", //Clear State Program
+                "apfa" => "", //Foreign Apps
+                "apas" => "", //Foreign Assets
+                "apgs" => array( //GlobalStateSchema
+                            "nui" => "", //Number Ints
+                            "nbs" => "", //Number Byteslices
+                        ), 
+                "apls" => array( //LocalStateSchema
+                            "nui" => "", //Number Ints
+                            "nbs" => "", //Number Byteslices
+                        ), 
             ),
 );
+*/
 
+#Compact Certificate
+/*
+$transaction=array(
+        "txn" => array(
+                "type" => "cert", //Tx Type
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "fee" => 1000, //Fee
+                "fv" => 13029982, //First Valid
+                "lv" => 13023082, //Last Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "certrnd" => "", //Round
+                "certtype" => "", //CompactCertType
+                "cert" => "", //Cert
+            ),
+);
+*/
+
+#Register account online
+/*
+$transaction=array(
+        "txn" => array(
+                "type" => "keyreg", //Tx Type
+                "selkey" => "X84ReKTmp+yfgmMCbbokVqeFFFrKQeFZKEXG89SXwm4=", //SelectionPK
+                "fee" => 1000, //Fee
+                "fv" => 13009389, //First Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "lv" => 13009489, //Last Valid
+                "votefst" => 13009489, //VoteFirst
+                "votelst" => 13009589, //VoteLast
+                "votekd" => 1730, //VoteKeyDilution
+                "votekey" => "eXq34wzh2UIxCZaI1leALKyAvSz/+XOe0wqdHagM+bw=",
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+            ),
+);
+*/
+
+#Register account offline
+/*
+$transaction=array(
+        "txn" => array(
+                "type" => "keyreg", //Tx Type
+                "fee" => 1000, //Fee
+                "fv" => 13009389, //First Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "lv" => 13009489, //Last Valid
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+            ),
+);
+*/
+
+#Close an Account
+/*
+$transaction=array(
+        "txn" => array(
+                "type" => "pay", //Tx Type
+                "close" => "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+                "fee" => 1000, //Fee
+                "fv" => 13009389, //First Valid
+                "lv" => 13009489, //Last Valid
+                "gen" => "mainnet-v1.0", // GenesisID
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "note" => "Testes", //You note
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "rcv" => "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4", //Receiver
+            ),
+);
+*/
+
+#Create an Asset 
+/*
+$transaction=array(
+        "txn" => array(
+                "type" => "acfg", //Tx Type
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "fee" => 1000, //Fee
+                "fv" => 13027977, //First Valid
+                "lv" => 13028977, //Last Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "apar" => array( //AssetParams
+                        //"am" => "", //MetaDataHash
+                        "an" => "MyToken", //AssetName
+                        "au" => "https://mytoken.site", //URL
+                        "c" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ClawbackAddr
+                        "dc" => 2, //Decimals
+                        "f" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //FreezeAddr
+                        "m" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ManagerAddr
+                        "r" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ReserveAddr
+                        "t" => 100000000000, //Total
+                        "un" => "MTK", //UnitName
+                    ),
+                
+            ),
+);
+*/
+
+#Reconfigure an Asset 
+/*
+$transaction=array(
+        "txn" => array(
+                "type" => "acfg", //Tx Type
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "fee" => 1000, //Fee
+                "fv" => 13027977, //First Valid
+                "lv" => 13028977, //Last Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "caid" => 185553584,
+                "apar" => array( //AssetParams
+                        "c" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ClawbackAddr
+                        "f" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //FreezeAddr
+                        "m" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ManagerAddr
+                        "r" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ReserveAddr
+                    ),
+                
+            ),
+);
+*/
+
+#Destroy an Asset 
+/*
+$transaction=array(
+        "txn" => array(
+                "type" => "acfg", //Tx Type
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "fee" => 1000, //Fee
+                "fv" => 13027977, //First Valid
+                "lv" => 13028977, //Last Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "caid" => 185553584, //ConfigAsset ID
+            ),
+);
+*/
+
+#Opt-in to an Asset
+/*
+$transaction=array(
+        "txn" => array(
+                "type" => "axfer", //Tx Type
+                "arcv" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //AssetReceiver
+                "snd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //Sender
+                "fee" => 1000, //Fee
+                "fv" => 13028464, //First Valid
+                "lv" => 13028564, //Last Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "xaid" => 185553584, //XferAsset ID
+            ),
+);
+*/
+
+#Revoke an Asset
+/*
+$transaction=array(
+        "txn" => array(
+                "aamt" => 100,
+                "type" => "axfer", //Tx Type
+                "arcv" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //AssetReceiver
+                "asnd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //AssetSender
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "fee" => 1000, //Fee
+                "fv" => 13028982, //First Valid
+                "lv" => 13029982, //Last Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "xaid" => 185553584, //XferAsset ID
+            ),
+);
+*/
+
+#Freeze an Asset
+/*
+$transaction=array(
+        "txn" => array(
+                "afrz" => false,
+                "type" => "afrz", //Tx Type
+                "fadd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //FreezeAccount
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "fee" => 1000, //Fee
+                "fv" => 13029982, //First Valid
+                "lv" => 13023082, //Last Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "faid" => 185553584, //FreezeAsset
+            ),
+);
+*/
+
+#Transfer an Asset
+/*
+$transaction=array(
+        "txn" => array(
+                "aamt" => 100,
+                "type" => "axfer", //Tx Type
+                "arcv" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //AssetReceiver
+                "snd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //Sender
+                "fee" => 1000, //Fee
+                "fv" => 13028982, //First Valid
+                "lv" => 13029982, //Last Valid
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "xaid" => 185553584, //XferAsset ID
+            ),
+);
+*/
+
+#Payment Transaction (ALGO)
+/*
+$transaction=array(
+        "txn" => array(
+                "type" => "pay", //Tx Type
+                "fee" => 1000, //Fee
+                "fv" => 13009389, //First Valid
+                "gen" => "mainnet-v1.0", // GenesisID
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "lv" => 13009489, //Last Valid
+                "note" => "Testes", //You note
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "rcv" => "IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU", //Receiver
+                "amt" => 1000, //Amount
+            ),
+);
+*/
+
+#Sign Transaction
+/*
 $params['params']=array(
    "transaction" => $algorand_kmd->txn_encode($transaction),
    "wallet_handle_token" => $wallet_handle_token,
@@ -253,10 +493,9 @@ $params['params']=array(
 $return=$algorand_kmd->post("v1","transaction","sign",$params);
 $r=json_decode($return['response']);
 $txn=base64_decode($r->signed_transaction);
-
+echo $txn;
 */
-
-#Broadcasts a raw transaction to the network from /v1/transaction/sign.
+#Broadcasts a raw transaction to the network.
 /*
 $algorand = new Algorand_algod('4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7',"localhost",53898);
 $params['transaction']=$txn;
@@ -273,5 +512,5 @@ print_r(json_decode($return['response']));
 print_r(json_decode($return['message']));
 
 //For definitions:
-//https://developer.algorand.org/docs/reference/rest-apis/kmd/#generatekeyrequest
+//https://developer.algorand.org/docs/reference/rest-apis/kmd/
 ?>
