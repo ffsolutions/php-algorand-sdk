@@ -219,7 +219,7 @@ $ git clone https://github.com/ffsolutions/php-algorand-sdk.git
 
 After cloning the repository, you need to include the `php-algorand-sdk`:
 ```php
-require_once 'sdk/algorand.php';
+include('sdk/algorand.php');
 ```
 
 
