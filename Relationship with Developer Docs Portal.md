@@ -24,6 +24,15 @@ $return=$algorand->get("v2","transactions","params");
 include('sdk/algorand.php');
 $algorand_kmd = new Algorand_kmd('{kmd-token}',"localhost",64988);
 
+#Wallet Init
+$params['params']=array(
+    "wallet_id" => "",
+    "wallet_password" => "",
+);
+$return=$algorand_kmd->post("v1","wallet","init",$params);
+$return_array=json_decode($return['response']);
+$wallet_handle_token=$return_array->wallet_handle_token;
+
 #Generate Account
 $params['params']=array(
     "display_mnemonic" => false,
@@ -74,6 +83,15 @@ $transaction=array(
 
 #### Sign the transaction
 ```php
+#Wallet Init
+$params['params']=array(
+    "wallet_id" => "",
+    "wallet_password" => "",
+);
+$return=$algorand_kmd->post("v1","wallet","init",$params);
+$return_array=json_decode($return['response']);
+$wallet_handle_token=$return_array->wallet_handle_token;
+
 $params['params']=array(
    "transaction" => $algorand_kmd->txn_encode($transaction),
    "wallet_handle_token" => $wallet_handle_token,
