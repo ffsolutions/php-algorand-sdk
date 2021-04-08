@@ -998,6 +998,94 @@ echo "txId: $txId";
 
 For more details: https://developer.algorand.org/docs/reference/rest-apis/kmd/
 
+## Atomic Transfers
+Create Transactions
+```php
+//Transaction 1
+$transactions=array();
+$transactions[]=array(
+        "txn" => array(
+                "type" => "pay", //Tx Type
+                "fee" => 1000, //Fee
+                "fv" => 13089936, //First Valid
+                "gen" => "mainnet-v1.0", // GenesisID
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "lv" => 13090936, //Last Valid
+                "note" => "Testes", //You note
+                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "rcv" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //Receiver
+                "amt" => 1000, //Amount
+            ),
+);
+
+//Transaction 2
+$transactions[]=array(
+        "txn" => array(
+                "type" => "pay", //Tx Type
+                "fee" => 1000, //Fee
+                "fv" => 13089936, //First Valid
+                "gen" => "mainnet-v1.0", // GenesisID
+                "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
+                "lv" => 13090936, //Last Valid
+                "note" => "Testes", //You note
+                "snd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //Sender
+                "rcv" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Receiver
+                "amt" => 1000, //Amount
+            ),
+);
+```
+
+Group Transactions
+```php
+$groupid=$algorand_kmd->groupid($transactions);
+#Assigns Group ID
+$transactions[0]['txn']['grp']=$groupid;
+$transactions[1]['txn']['grp']=$groupid;
+```
+
+Sign Transactions
+```php
+#Sign Transaction 1
+$txn="";
+$params['params']=array(
+   //"public_key" => $algorand_kmd->pk_encode("DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4"),
+   "transaction" => $algorand_kmd->txn_encode($transactions[0]),
+   "wallet_handle_token" => $wallet_handle_token,
+   "wallet_password" => "testes",
+);
+
+
+$return=$algorand_kmd->post("v1","transaction","sign",$params);
+$r=json_decode($return['response']);
+$txn.=base64_decode($r->signed_transaction);
+
+
+#Sign Transaction 2
+$params['params']=array(
+   //"public_key" => $algorand_kmd->pk_encode("DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY"),
+   "transaction" => $algorand_kmd->txn_encode($transactions[1]),
+   "wallet_handle_token" => $wallet_handle_token,
+   "wallet_password" => "testes",
+);
+$return=$algorand_kmd->post("v1","transaction","sign",$params);
+$r=json_decode($return['response']);
+$txn.=base64_decode($r->signed_transaction);
+
+echo $txn;
+```
+
+Send Transaction Group
+```php
+#Broadcasts a raw atomic transaction to the network.
+
+$algorand = new Algorand_algod('4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7',"localhost",53898);
+$params['transaction']=$txn;
+$return=$algorand->post("v2","transactions",$params);
+$txId=$return['response']->txId;
+echo "txId: $txId";
+```
+
+For more details: https://developer.algorand.org/docs/features/atomic_transfers/
 
 ## For use the **indexer**:
 Start the SDK

@@ -448,20 +448,20 @@ class Algorand_kmd
 
     }
 
-    public function txn_encode($transaction){
+    public function txn_encode($transaction,$opt_msgpack=false){
 
         $msgpack=new msgpack;
 
         $out=$transaction;
         ksort($out['txn']);
         
-       
+      
 
-        
         if(!empty($out['txn']['fee'])) { $out['txn']['fee']=intval($out['txn']['fee']); }
         if(!empty($out['txn']['fv'])) { $out['txn']['fv']=intval($out['txn']['fv']); }
         if(!empty($out['txn']['gen'])) { $out['txn']['gen']=strval($out['txn']['gen']); }
         if(!empty($out['txn']['gh'])) { $out['txn']['gh']=strval($out['txn']['gh']); }
+        if(!empty($out['txn']['grp'])) { $out['txn']['grp']=strval($out['txn']['grp']); }
         if(!empty($out['txn']['lv'])) { $out['txn']['lv']=intval($out['txn']['lv']); }
         if(!empty($out['txn']['note'])) { $out['txn']['note']=strval($out['txn']['note']); }
         if(!empty($out['txn']['gp'])) { $out['txn']['gp']=strval($out['txn']['gp']); }
@@ -473,6 +473,7 @@ class Algorand_kmd
 
         
         if(!empty($out['txn']['gh'])) { $out['txn']['gh']=b32::decode($out['txn']['gh']); }
+        if(!empty($out['txn']['grp'])) { $out['txn']['grp']=b32::decode($out['txn']['grp']); }
         if(!empty($out['txn']['snd'])) { $out['txn']['snd']=b32::decode($out['txn']['snd']); }
         if(!empty($out['txn']['rcv'])) { $out['txn']['rcv']=b32::decode($out['txn']['rcv']); }
         if(!empty($out['txn']['close'])) { $out['txn']['close']=b32::decode($out['txn']['close']); }
@@ -495,9 +496,42 @@ class Algorand_kmd
        
         
         $out=$msgpack->p($out['txn']);
-
+        if($opt_msgpack==false){
+            $out=base64_encode($out);
+        }
+        return $out;
+    }
+    
+    public function pk_encode($array){
+        $out=$array;
+        $out=b32::decode($out);
         $out=base64_encode($out);
         return $out;
+    }
+    
+    public function groupid($transactions){
+        
+       $msgpack=new msgpack;
+       $txn="";
+       $total=count($transactions);
+       $txids=array();
+       for($x=0; $x<$total; $x++){
+          $raw_txn=$this->txn_encode($transactions[$x],true);
+          $raw_txn=hash('sha512/256',"TX".$raw_txn,true);
+          $txids[$x]=$raw_txn;
+       }
+        
+        $group_list=array(
+            'txlist' => $txids,
+        );
+        
+        $encoded=$msgpack->p($group_list);
+        $gid = hash('sha512/256',"TG".$encoded,true);
+        
+        $gid = b32::encode($gid);
+        
+        
+        return $gid;
     }
 
      public function buffer($data){
