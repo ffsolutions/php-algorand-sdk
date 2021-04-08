@@ -11,8 +11,8 @@ All files in this directory will show you about the best pratices that you shoul
 - Algorand algod, kmd, indexer
 
 ## Frameworks Compatibility
-This SDK was developed to support several PHP Frameworks, tested with Native Frameworks, FFS, Laravel, Lumen and Codeigniter, new ones will be tested soon.
-In the SDK folder you will find the setups.
+This SDK was developed to support several PHP Frameworks, tested with Native Frameworks, FFS, Laravel, Lumen, Yii and Codeigniter, new ones will be tested soon.
+In the "sdk" folder you will find the setup suggestions.
 
 
 ## Quick start
@@ -29,12 +29,25 @@ $ ./algorand-indexer daemon -h -d data
 After cloning the repository, you need to include the `php-algorand-sdk`:
 ```php
 include('sdk/algorand.php');
-```
 
+#OR with namespace include
+
+use App\Algorand\algod;
+use App\Algorand\kmd;
+use App\Algorand\indexer;
+use App\Algorand\b32;
+use App\Algorand\msgpack;
+
+```
 
 For use the **algod**:
 ```php
 $algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.admin.token
+$return=$algorand->get("v2","status");
+print_r($return);
+
+#OR with namespace include
+$algorand = new algod('{algod-token}',"localhost",53898); //get the token key in data/algod.admin.token
 $return=$algorand->get("v2","status");
 print_r($return);
 ```
@@ -46,6 +59,11 @@ For use the **kmd**:
 $algorand_kmd = new Algorand_kmd('{kmd-token}',"localhost",64988); //get the token key in data/kmd-{version}/kmd.token
 $return=$algorand_kmd->get("versions");
 print_r($return);
+
+#OR with namespace include
+$algorand_kmd = new kmd('{kmd-token}',"localhost",64988); //get the token key in data/kmd-{version}/kmd.token
+$return=$algorand_kmd->get("versions");
+print_r($return);
 ```
 (see all avaliable functions in **kmd.php**)
 
@@ -53,6 +71,11 @@ print_r($return);
 For use the **indexer**:
 ```php
 $algorand_indexer = new Algorand_indexer('{algorand-indexer-token}',"localhost",8089);
+$return=$algorand_indexer->get("health");
+print_r($return);
+
+#OR with namespace include
+$algorand_indexer = new indexer('{algorand-indexer-token}',"localhost",8089);
 $return=$algorand_indexer->get("health");
 print_r($return);
 ```
