@@ -11,8 +11,9 @@ All files in this directory will show you about the best pratices that you shoul
 - Algorand algod, kmd, indexer
 
 ## Frameworks Compatibility
-This SDK was developed to support several PHP Frameworks, tested with Native Frameworks, FFS, Laravel, Lumen, Yii and Codeigniter, new ones will be tested soon.
-In the "sdk" folder you will find the setup suggestions.
+This SDK was developed to support several PHP Frameworks, tested with **Native Frameworks**, **FFS**, **Laravel**, **Lumen**, **Yii**, **Codeigniter** AND **Symfony**, new ones will be tested soon.
+
+In the **sdk** folder you will find the setup suggestions.
 
 
 ## Quick start
