@@ -247,6 +247,14 @@ $ git clone https://github.com/ffsolutions/php-algorand-sdk.git
 After cloning the repository, you need to include the `php-algorand-sdk`:
 ```php
 include('sdk/algorand.php');
+
+#OR with namespace include
+
+use App\Algorand\algod;
+use App\Algorand\kmd;
+use App\Algorand\indexer;
+use App\Algorand\b32;
+use App\Algorand\msgpack;
 ```
 
 
@@ -254,6 +262,9 @@ include('sdk/algorand.php');
 Start the SDK
 ```php
 $algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.token
+
+#OR with namespace include
+$algorand = new algod('{algod-token}',"localhost",53898); //get the token key in data/algod.token
 ```
 
 ### Get the versions
@@ -507,6 +518,9 @@ For more details: https://developer.algorand.org/docs/reference/rest-apis/algod/
 Start the SDK
 ```php
 $algorand_kmd = new Algorand_kmd('{kmd-token}',"localhost",64988); //get the token key in data/kmd-{version}/kmd.token
+
+#OR with namespace include
+$algorand_kmd = new kmd('{kmd-token}',"localhost",64988); //get the token key in data/kmd-{version}/kmd.token
 ```
 
 #### Get Versions
@@ -1118,6 +1132,9 @@ For more details: https://developer.algorand.org/docs/features/atomic_transfers/
 Start the SDK
 ```php
 $algorand_indexer = new Algorand_indexer('{algorand-indexer-token}',"localhost",8089);
+
+#OR with namespace include
+$algorand_indexer = new indexer('{algorand-indexer-token}',"localhost",8089);
 ```
 
 
