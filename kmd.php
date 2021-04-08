@@ -3,13 +3,14 @@ require_once 'sdk/algorand.php';
 
 $algorand_kmd = new Algorand_kmd('{kmd-token}',"localhost",64212); //get the token key in data/kmd-{version}/kmd.token and port in data/kmd-{version}/kmd.net
 
+
 $algorand_kmd->debug(1);
 //algorand->setSSL('/home/felipe/certificate.cert'); //Optional
 
 #Just uncomment to try all avaliable functions
 
 #Get Versions
-$return=$algorand_kmd->get("versions");
+//$return=$algorand_kmd->get("versions");
 
 #swagger.json
 #$return=$algorand_kmd->get("swagger.json");
@@ -503,11 +504,13 @@ echo $txn;
 $algorand = new Algorand_algod('4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7',"localhost",53898);
 $params['transaction']=$txn;
 $return=$algorand->post("v2","transactions",$params);
-$txId=$return['response']->txId;
-echo "txId: $txId";
+if(!empty($return['response']->txId)){
+    $txId=$return['response']->txId;
+    echo "txId: $txId";
+}
 */
 
-#Atomic Transaction (Alpha)
+#Atomic Transaction
 /*
 //Transaction 1
 $transactions=array();
@@ -583,16 +586,24 @@ echo $txn;
 $algorand = new Algorand_algod('4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7',"localhost",53898);
 $params['transaction']=$txn;
 $return=$algorand->post("v2","transactions",$params);
-$txId=$return['response']->txId;
-echo "txId: $txId";
+if(!empty($return['response']->txId)){
+    $txId=$return['response']->txId;
+    echo "txId: $txId";
+}
 */
 
 #Full response with debug (json response)
-print_r($return);
+if(!empty($return)){
+    print_r($return);
+}
 #Only response array
-print_r(json_decode($return['response']));
+if(!empty($return['response'])){
+    print_r(json_decode($return['response']));
+}
 #Only erros messages  array
-print_r(json_decode($return['message']));
+if(!empty($return['message'])){
+    print_r(json_decode($return['message']));
+}
 
 //For definitions:
 //https://developer.algorand.org/docs/reference/rest-apis/kmd/

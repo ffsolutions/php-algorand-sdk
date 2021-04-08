@@ -3,7 +3,6 @@ require_once 'sdk/algorand.php';
 
 $algorand = new Algorand_algod('{algod-token}',"localhost",53898); //get the token key in data/algod.token
 
-
 $algorand->debug(1);
 
 //algorand->setSSL('/home/felipe/certificate.cert'); //Optional
@@ -125,9 +124,10 @@ $return=$algorand->post("v2","teal","dryrun",$params);
 #./goal clerk send -a 1000 -f DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4 -t IYVZLDFIF6KUMSDFVIKHPBT3FI5QVZJKJ6BPFSGIJDUJGUUASKNRA4HUHU -d data -o transactions/tran.txn
 #./goal clerk sign --infile="trans/tran.txn" --outfile="trans/tran.stxn" -d data
 
+
+//$params['file']="transactions/tran.stxn";
 /*
-$params['file']="transactions/tran.stxn"; //Trasaction from files
-//$params['transaction']=""; //Or encoded transactions
+$params['transaction']="";
 $return=$algorand->post("v2","transactions",$params);
 */
 
@@ -142,11 +142,17 @@ $return=$algorand->post("v2","transactions",$params);
 
 
 #Full response with debug (json response)
-print_r($return);
+if(!empty($return)){
+    print_r($return);
+}
 #Only response array
-print_r(json_decode($return['response']));
+if(!empty($return['response'])){
+    print_r(json_decode($return['response']));
+}
 #Only erros messages  array
-print_r(json_decode($return['message']));
+if(!empty($return['message'])){
+    print_r(json_decode($return['message']));
+}
 
 //For definitions:
 //https://developer.algorand.org/docs/reference/rest-apis/algod/v2/#definitions

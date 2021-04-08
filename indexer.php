@@ -28,6 +28,7 @@ $return=$algorand_indexer->get("v2","accounts?".$query);
 
 #Lookup account information.
 //$return=$algorand_indexer->get("v2","accounts","{account-id}");
+//$return=$algorand_indexer->get("v2","accounts","2MSH4KOT47B4ROHGROVV4AXBLKD4GYY47SX45UIGMOYMG4D4AZUG3WUFXA");
 
 #Lookup account transactions.
 /*
@@ -50,7 +51,8 @@ $query=http_build_query(array(
     "txid" => "", //string
 ));
 
-$return=$algorand_indexer->get("v2","accounts","{account-id}","transactions?".$query);
+//$return=$algorand_indexer->get("v2","accounts","{account-id}","transactions?".$query);
+//$return=$algorand_indexer->get("v2","accounts","NJCLL5UPIZKXTHQ42M52B72DSO3PATJ2DEQOZQXJMWFMZPDLGUYV3PBJ5Q","transactions?".$query);
 */
 
 #Search for applications
@@ -80,7 +82,8 @@ $return=$algorand_indexer->get("v2","assets?".$query);
 */
 
 #Lookup asset information.
-//$return=$algorand_indexer->get("v2","assets","{asset-id}");
+//$return=$algorand_indexer->get("v2","assets","5");
+//$return=$algorand_indexer->get("v2","assets","312769");
 
 #Lookup the list of accounts who hold this asset
 /*
@@ -120,44 +123,51 @@ $return=$algorand_indexer->get("v2","assets","{asset-id}","transactions".$query)
 
 #Lookup block.
 //$return=$algorand_indexer->get("v2","blocks","{round-number}");
+//$return=$algorand_indexer->get("v2","blocks","5876435");
                                
 #Search for transactions.
 /*
 $query=http_build_query(array(
-    "address" => "", //string
-    "address-role" => "sender", //enum (sender, receiver, freeze-target)
-    "after-time" => "", //string (date-time)
-    "application-id" => 0, //integer
-    "asset-id" => 0, //integer
-    "before-time" => "", //string (date-time)
-    "currency-greater-than" => 0, //integer
-    "currency-less-than" => 0, //integer
-    "exclude-close-to" => "false", //boolean
+    //"address" => "NJCLL5UPIZKXTHQ42M52B72DSO3PATJ2DEQOZQXJMWFMZPDLGUYV3PBJ5Q", //string
+    //"address-role" => "sender", //enum (sender, receiver, freeze-target)
+    //"after-time" => "", //string (date-time)
+    //"application-id" => 0, //integer
+    //"asset-id" => 0, //integer
+    //"before-time" => "", //string (date-time)
+    //"currency-greater-than" => 0, //integer
+    //"currency-less-than" => 0, //integer
+    //"exclude-close-to" => "false", //boolean
     "limit" => "100", //integer
-    "min-round" => 2466647, //integer
-    "max-round" => 2566647, //integer
-    "next" => "", //string - previous return {next-token}
-    "note-prefix" => "", //string
-    "rekey-to" => false, //boolean
+    //"min-round" => 2466647, //integer
+    //"max-round" => 2566647, //integer
+    //"next" => "", //string - previous return {next-token}
+    //"note-prefix" => "", //string
+    //"rekey-to" => false, //boolean
     //"round" => 2566247, //integer
-    "sig-type" => "sig", //enum (sig, msig, lsig)
-    "tx-type" => "pay", //enum (pay, keyreg, acfg, axfer, afrz, appl)
-    "txid" => "", //string
+    //"sig-type" => "sig", //enum (sig, msig, lsig)
+    //"tx-type" => "pay", //enum (pay, keyreg, acfg, axfer, afrz, appl)
+    //"txid" => "", //string
 ));
-*/
-//$return=$algorand_indexer->get("v2","transactions?".$query);
 
+$return=$algorand_indexer->get("v2","transactions?".$query);
+*/
 
 #Lookup a single transaction.
-//$return=$algorand_indexer->get("v2","transactions","{txid}");
+//$return=$algorand_indexer->get("v2","transactions","3TRNCPXPTSVOYCHY3MJJPF5WKBJ5SL2XOUSAFMJWY4IS5MA75P3Q");
 
 
 #Full response with debug (json response)
-print_r($return);
+if(!empty($return)){
+    print_r($return);
+}
 #Only response array
-print_r(json_decode($return['response']));
+if(!empty($return['response'])){
+    print_r(json_decode($return['response']));
+}
 #Only erros messages  array
-print_r(json_decode($return['message']));
+if(!empty($return['message'])){
+    print_r(json_decode($return['message']));
+}
 
 //For definitions:
 //https://developer.algorand.org/docs/reference/rest-apis/indexer/
