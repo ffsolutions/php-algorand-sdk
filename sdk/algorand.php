@@ -87,15 +87,15 @@ class Algorand_algod {
 
             }else{
 
-                // Request
-                $request = $params[$xp]['params'];
-                $request_body = $params[$xp]['body'];
+              // Request
+              if(!empty($params[$xp]['params'])){ $request = $params[$xp]['params']; }
+              if(!empty($params[$xp]['body'])){ $request_body = $params[$xp]['body']; }
 
-                // File
-                $file=$params[$xp]['file'];
+              // File
+              if(!empty($params[$xp]['file'])){ $file=$params[$xp]['file']; }
 
-                // Transaction
-                $transaction=$params[$xp]['transaction'];
+              // Transaction
+              if(!empty($params[$xp]['transaction'])){ $transaction=$params[$xp]['transaction']; }
 
             }
         }
@@ -310,8 +310,8 @@ class Algorand_kmd
 
             }else{
                 // Request
-                $request = $params[$xp]['params'];
-                $request_body = $params[$xp]['body'];
+                if(!empty($params[$xp]['params'])){ $request = $params[$xp]['params']; }
+                if(!empty($params[$xp]['body'])){ $request_body = $params[$xp]['body']; }
 
             }
         }
@@ -454,8 +454,8 @@ class Algorand_kmd
 
         $out=$transaction;
         ksort($out['txn']);
-        
-      
+
+
 
         if(!empty($out['txn']['fee'])) { $out['txn']['fee']=intval($out['txn']['fee']); }
         if(!empty($out['txn']['fv'])) { $out['txn']['fv']=intval($out['txn']['fv']); }
@@ -471,7 +471,7 @@ class Algorand_kmd
         if(!empty($out['txn']['amt'])) { $out['txn']['amt']=intval($out['txn']['amt']); }
         if(!empty($out['txn']['close'])) { $out['txn']['close']=strval($out['txn']['close']); }
 
-        
+
         if(!empty($out['txn']['gh'])) { $out['txn']['gh']=b32::decode($out['txn']['gh']); }
         if(!empty($out['txn']['grp'])) { $out['txn']['grp']=b32::decode($out['txn']['grp']); }
         if(!empty($out['txn']['snd'])) { $out['txn']['snd']=b32::decode($out['txn']['snd']); }
@@ -487,30 +487,30 @@ class Algorand_kmd
         if(!empty($out['txn']['apsu'])) { $out['txn']['apsu']=b32::decode($out['txn']['apsu']); }
         if(!empty($out['txn']['apfa'])) { $out['txn']['apfa']=b32::decode($out['txn']['apfa']); }
         if(!empty($out['txn']['apas'])) { $out['txn']['apas']=b32::decode($out['txn']['apas']); }
-       
+
         if(!empty($out['txn']['apar']['am'])) { $out['txn']['apar']['am']=b32::decode($out['txn']['apar']['am']); }
         if(!empty($out['txn']['apar']['c'])) { $out['txn']['apar']['c']=b32::decode($out['txn']['apar']['c']); }
         if(!empty($out['txn']['apar']['f'])) { $out['txn']['apar']['f']=b32::decode($out['txn']['apar']['f']); }
         if(!empty($out['txn']['apar']['m'])) { $out['txn']['apar']['m']=b32::decode($out['txn']['apar']['m']); }
         if(!empty($out['txn']['apar']['r'])) { $out['txn']['apar']['r']=b32::decode($out['txn']['apar']['r']); }
-       
-        
+
+
         $out=$msgpack->p($out['txn']);
         if($opt_msgpack==false){
             $out=base64_encode($out);
         }
         return $out;
     }
-    
+
     public function pk_encode($array){
         $out=$array;
         $out=b32::decode($out);
         $out=base64_encode($out);
         return $out;
     }
-    
+
     public function groupid($transactions){
-        
+
        $msgpack=new msgpack;
        $txn="";
        $total=count($transactions);
@@ -520,17 +520,17 @@ class Algorand_kmd
           $raw_txn=hash('sha512/256',"TX".$raw_txn,true);
           $txids[$x]=$raw_txn;
        }
-        
+
         $group_list=array(
             'txlist' => $txids,
         );
-        
+
         $encoded=$msgpack->p($group_list);
         $gid = hash('sha512/256',"TG".$encoded,true);
-        
+
         $gid = b32::encode($gid);
-        
-        
+
+
         return $gid;
     }
 
@@ -643,8 +643,8 @@ class Algorand_indexer
 
             }else{
                 // Request
-                $request = $params[$xp]['params'];
-                $request_body = $params[$xp]['body'];
+                if(!empty($params[$xp]['params'])){ $request = $params[$xp]['params']; }
+                if(!empty($params[$xp]['body'])){ $request_body = $params[$xp]['body']; }
             }
 
         }
