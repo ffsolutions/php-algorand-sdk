@@ -10,7 +10,8 @@ All files in this directory will show you about the best pratices that you shoul
 - Built-in libcurl support.
 - Algorand algod, kmd, indexer
 
-Frameworks Compatibility: This SDK was developed to support several PHP Frameworks, tested with Native Frameworks, FFS, Laravel, Lumen and Codeigniter, new ones will be tested soon.
+## Frameworks Compatibility
+This SDK was developed to support several PHP Frameworks, tested with Native Frameworks, FFS, Laravel, Lumen and Codeigniter, new ones will be tested soon.
 In the SDK folder you will find the setups.
 
 
