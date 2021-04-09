@@ -1,4 +1,3 @@
-
 ## Overview
 
 This solution describes how to use the new PHP Algorand SDK with the most used PHP Frameworks.
@@ -58,9 +57,9 @@ $algorand_indexer = new indexer('{algorand-indexer-token}',"localhost",8089);
 
 # Codeigniter
 
-![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How to Use with PHP Frameworks/images/codeigniter file structure.png)
+![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How%20to%20Use%20with%20PHP%20Frameworks/images/codeigniter%20file%20structure.png)
 
- 1. Copy the ***Algorand*** directory from ***sdk/_namespace_based***, to ***app*** directory inside your project.
+ 1. Copy the ***Algorand*** directory from ***sdk/_namespace_based***, to ***app*** directory.
  2. Create the controller ***app/Controllers/AlgodController.php*** and add the code:
 ```php
 <?php
@@ -202,9 +201,9 @@ $routes->get('/indexer', 'IndexerController::index');
 
 # Laravel
 
-![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How to Use with PHP Frameworks/images/laravel file structure.png)
+![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How%20to%20Use%20with%20PHP%20Frameworks/images/laravel%20file%20structure.png)
 
- 1. Copy the ***Algorand*** directory from ***sdk/_namespace_based***, to ***app*** directory inside your project.
+ 1. Copy the ***Algorand*** directory from ***sdk/_namespace_based***, to ***app*** directory.
  2. Create the controller ***app/Http/Controllers/AlgodController.php*** and add the code:
 ```php
 <?php
@@ -356,9 +355,9 @@ Route::get('/', function () {
 
 # Lumen
 
-![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How to Use with PHP Frameworks/images/lumen file structure.png)
+![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How%20to%20Use%20with%20PHP%20Frameworks/images/lumen%20file%20structure.png)
 
- 1. Copy the ***Algorand*** directory from ***sdk/_namespace_based***, to ***app*** directory inside your project.
+ 1. Copy the ***Algorand*** directory from ***sdk/_namespace_based***, to ***app*** directory.
  3. Create the controller ***app/Http/Controllers/AlgodController.php*** and add the code:
 ```php
 <?php
@@ -513,9 +512,9 @@ $router->get('/', function () {
 
 # Symfony
 
-![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How to Use with PHP Frameworks/images/symfony.png)
+![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How%20to%20Use%20with%20PHP%20Frameworks/images/symfony.png)
 
- 1. Copy the ***Algorand*** directory from ***sdk/_namespace_based***, to ***src*** directory inside your project.
+ 1. Copy the ***Algorand*** directory from ***sdk/_namespace_based***, to ***src*** directory.
  2. Create the controller ***src/Controller/DefaultController.php*** and add the code:
 ```php
 <?php
@@ -651,7 +650,7 @@ index:
 
 # Yii
 
-![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How to Use with PHP Frameworks/images/yii file structure.png)
+![File Structure](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/How%20to%20Use%20with%20PHP%20Frameworks/images/yii%20file%20structure.png)
 
  1. Copy the ***Algorand*** directory from ***sdk/_namespace_based***, to ***yii*** directory.
  2. Create the controller ***controllers/SiteController.php*** and add the code:
