@@ -476,7 +476,7 @@ $wallet_handle_token=$return_array->wallet_handle_token;
 $transaction=array(
         "txn" => array(
                 "type" => "acfg", //Tx Type
-                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "snd" => "{sender-address}", //Sender
                 "fee" => 1000, //Fee
                 "fv" => 13027977, //First Valid
                 "lv" => 13028977, //Last Valid
@@ -485,11 +485,11 @@ $transaction=array(
                         //"am" => "", //MetaDataHash
                         "an" => "MyToken", //AssetName
                         "au" => "https://mytoken.site", //URL
-                        "c" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ClawbackAddr
+                        "c" => "{clawback-address}", //ClawbackAddr
                         "dc" => 2, //Decimals
-                        "f" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //FreezeAddr
-                        "m" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ManagerAddr
-                        "r" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ReserveAddr
+                        "f" => "{freeze-address}", //FreezeAddr
+                        "m" => "{manager-address}", //ManagerAddr
+                        "r" => "{reserve-address}", //ReserveAddr
                         "t" => 100000000000, //Total
                         "un" => "MTK", //UnitName
                     ),
@@ -532,17 +532,17 @@ $wallet_handle_token=$return_array->wallet_handle_token;
 $transaction=array(
         "txn" => array(
                 "type" => "acfg", //Tx Type
-                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "snd" => "{sender-address}", //Sender
                 "fee" => 1000, //Fee
                 "fv" => 13027977, //First Valid
                 "lv" => 13028977, //Last Valid
                 "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
                 "caid" => 185553584,
                 "apar" => array( //AssetParams
-                        "c" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ClawbackAddr
-                        "f" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //FreezeAddr
-                        "m" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ManagerAddr
-                        "r" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //ReserveAddr
+                        "c" => "{clawback-address}", //ClawbackAddr
+                        "f" => "{freeze-address}", //FreezeAddr
+                        "m" => "{manager-address}", //ManagerAddr
+                        "r" => "{reserve-address}", //ReserveAddr
                     ),
 
             ),
@@ -583,8 +583,8 @@ $wallet_handle_token=$return_array->wallet_handle_token;
 $transaction=array(
         "txn" => array(
                 "type" => "axfer", //Tx Type
-                "arcv" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //AssetReceiver
-                "snd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //Sender
+                "arcv" => "{receiver-address}", //AssetReceiver
+                "snd" => "{sender-address}", //Sender
                 "fee" => 1000, //Fee
                 "fv" => 13028464, //First Valid
                 "lv" => 13028564, //Last Valid
@@ -629,8 +629,8 @@ $transaction=array(
         "txn" => array(
                 "aamt" => 100,
                 "type" => "axfer", //Tx Type
-                "arcv" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //AssetReceiver
-                "snd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //Sender
+                "arcv" => "{asset-receiver-address}", //AssetReceiver
+                "snd" => "{sender-address}", //Sender
                 "fee" => 1000, //Fee
                 "fv" => 13028982, //First Valid
                 "lv" => 13029982, //Last Valid
@@ -675,8 +675,8 @@ $transaction=array(
         "txn" => array(
                 "afrz" => false,
                 "type" => "afrz", //Tx Type
-                "fadd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //FreezeAccount
-                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "fadd" => "{freeze-address}", //FreezeAccount
+                "snd" => "{sender-address}", //Sender
                 "fee" => 1000, //Fee
                 "fv" => 13029982, //First Valid
                 "lv" => 13023082, //Last Valid
@@ -721,9 +721,9 @@ $transaction=array(
         "txn" => array(
                 "aamt" => 100,
                 "type" => "axfer", //Tx Type
-                "arcv" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //AssetReceiver
-                "asnd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //AssetSender
-                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "arcv" => "{asset-receive-address}", //AssetReceiver
+                "asnd" => "{asset-sender-address}", //AssetSender
+                "snd" => "{sender-address}", //Sender
                 "fee" => 1000, //Fee
                 "fv" => 13028982, //First Valid
                 "lv" => 13029982, //Last Valid
@@ -767,7 +767,7 @@ $wallet_handle_token=$return_array->wallet_handle_token;
 $transaction=array(
         "txn" => array(
                 "type" => "acfg", //Tx Type
-                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
+                "snd" => "{sender-address}", //Sender
                 "fee" => 1000, //Fee
                 "fv" => 13027977, //First Valid
                 "lv" => 13028977, //Last Valid
@@ -817,8 +817,8 @@ $transactions[]=array(
                 "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
                 "lv" => 13090936, //Last Valid
                 "note" => "Testes", //You note
-                "snd" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Sender
-                "rcv" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //Receiver
+                "snd" => "{sender-address}", //Sender
+                "rcv" => "{receiver-address}", //Receiver
                 "amt" => 1000, //Amount
             ),
 );
@@ -833,8 +833,8 @@ $transactions[]=array(
                 "gh" => "YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=", //Genesis Hash
                 "lv" => 13090936, //Last Valid
                 "note" => "Testes", //You note
-                "snd" => "DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY", //Sender
-                "rcv" => "DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4", //Receiver
+                "snd" => "{sender-address}", //Sender
+                "rcv" => "{receiver-address}", //Receiver
                 "amt" => 1000, //Amount
             ),
 );
@@ -853,7 +853,7 @@ $transactions[1]['txn']['grp']=$groupid;
 #Sign Transaction 1
 $txn="";
 $params['params']=array(
-   //"public_key" => $algorand_kmd->pk_encode("DI65FPLNUXOJJR47FDTIB5TNNIA5G4EZFA44RZMRBE7AA4D453OYD2JCW4"),
+   //"public_key" => $algorand_kmd->pk_encode("{sender-address}"),
    "transaction" => $algorand_kmd->txn_encode($transactions[0]),
    "wallet_handle_token" => $wallet_handle_token,
    "wallet_password" => "testes",
@@ -867,7 +867,7 @@ $txn.=base64_decode($r->signed_transaction);
 
 #Sign Transaction 2
 $params['params']=array(
-   //"public_key" => $algorand_kmd->pk_encode("DOVA6TULHNY2DCS65LVT5QYLWZGM7WC2GISPRGNDWDUH3KUX56ZLQJW3AY"),
+   //"public_key" => $algorand_kmd->pk_encode("{sender-address}"),
    "transaction" => $algorand_kmd->txn_encode($transactions[1]),
    "wallet_handle_token" => $wallet_handle_token,
    "wallet_password" => "testes",
@@ -883,7 +883,7 @@ echo $txn;
 ```php
 #Broadcasts a raw atomic transaction to the network.
 
-$algorand = new Algorand_algod('4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7',"localhost",53898);
+$algorand = new Algorand_algod('{algod-token}',"localhost",53898);
 $params['transaction']=$txn;
 $return=$algorand->post("v2","transactions",$params);
 $txId=$return['response']->txId;
