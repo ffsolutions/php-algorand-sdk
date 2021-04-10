@@ -767,14 +767,23 @@ $return=$algorand_kmd->post("v1","program","sign",$params);
 
 ### Build and Sign a transaction
 For details: https://developer.algorand.org/docs/features/transactions
+
 **Types**:
+
 **appl** = ApplicationCallTx allows creating, deleting, and interacting with an application
+
 **cert** = CompactCertTx records a compact certificate
+
 **keyreg** = KeyRegistrationTx indicates a transaction that registers participation keys
+
 **acfg** = AssetConfigTx creates, re-configures, or destroys an asset
+
 **axfer** = AssetTransferTx transfers assets between accounts (optionally closing)
+
 **afrz** = AssetFreezeTx changes the freeze status of an asset
+
 **pay** = PaymentTx indicates a payment transaction
+
 
 ### Build Transaction
 #### Application Call Transaction
