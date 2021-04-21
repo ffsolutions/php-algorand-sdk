@@ -611,7 +611,7 @@ class Wallet{
     }
 
 
-    public function send($token,$from,$to,$amount,$note=""){
+    public function send($token,$wallet_password,$from,$to,$amount,$note=""){
 
       #Get parameters for constructing a new transaction
       $param_return=$this->algod->get("v2","transactions","params");
@@ -647,7 +647,7 @@ class Wallet{
       $params['params']=array(
          "transaction" => $this->kmd->txn_encode($transaction),
          "wallet_handle_token" => $token,
-         "wallet_password" => "testes"
+         "wallet_password" => $wallet_password
       );
 
 
@@ -773,7 +773,7 @@ switch ($action) {
   case 'send':
         $wallet_token=$wallet->token($wallet_id,$wallet_password);
 
-        $return=$wallet->send($wallet_token,$key_id,$to,$amount,$note);
+        $return=$wallet->send($wallet_token,$wallet_password,$key_id,$to,$amount,$note);
 
         echo $wallet->json_print($return['response']);
 
