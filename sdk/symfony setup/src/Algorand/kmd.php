@@ -4,8 +4,8 @@
 
 namespace App\Algorand;
 
-use App\Algorand\b32;
-use App\Algorand\msgpack;
+use app\Algorand\b32;
+use app\Algorand\msgpack;
 
 class kmd
 {
@@ -245,7 +245,10 @@ class kmd
         if(!empty($out['txn']['type'])) { $out['txn']['type']=strval($out['txn']['type']); }
         if(!empty($out['txn']['rcv'])) { $out['txn']['rcv']=strval($out['txn']['rcv']); }
         if(!empty($out['txn']['amt'])) { $out['txn']['amt']=intval($out['txn']['amt']); }
+        if(!empty($out['txn']['aamt'])) { $out['txn']['aamt']=intval($out['txn']['aamt']); }
         if(!empty($out['txn']['close'])) { $out['txn']['close']=strval($out['txn']['close']); }
+        if(!empty($out['txn']['xaid'])) { $out['txn']['xaid']=intval($out['txn']['xaid']); }
+        if(!empty($out['txn']['apid'])) { $out['txn']['apid']=intval($out['txn']['apid']); }
 
 
         if(!empty($out['txn']['gh'])) { $out['txn']['gh']=b32::decode($out['txn']['gh']); }
