@@ -1,0 +1,102 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+<title>Algorand Asset Manager PHP</title>
+</head>
+
+<body>
+    <main id="wallet">
+          <h1>Algorand Asset Manager PHP</h1>
+          <div id="left">
+              <h2>Wallets</h2>
+              <select id="wallets">
+
+              </select>
+             
+              <input type="password" id="wallet_password" placeholder="password">
+              <input type="button" id="wallet_load_keys" value="Load Keys">
+              &nbsp; &nbsp;
+              <a href="../wallet-gui">Wallet / Key Manager</a>
+
+              <br>
+              
+
+              <h2>Keys / From</h2>
+              <select id="keys" multiple>
+
+              </select>
+              
+              <br>
+              <input type="button" id="key_copy" value="Copy Key">
+              <input type="button" id="key_balance" value="Balance">
+              <input type="button" id="key_load_assets" value="Load Assets">
+              
+               <h2 id="asset_title">Assets</h2>
+              <input type="text" id="asset_id" placeholder="Asset ID"> <input type="button" id="asset_optin" value="Opt-in">
+              <select id="assets" multiple>
+
+              </select>
+              <input type="text" id="transaction_id" value="" placeholder="Transaction ID"> <input type="button" id="transaction_info" value="Get Info">
+              <br><br>
+              <input type="button" id="asset_info" value="Info">
+              <input type="button" id="asset_send" value="Send">
+              <input type="button" id="asset_create" value="Create ASA">
+              <input type="button" id="asset_create_nft" value="Create NFT">
+              <input type="button" id="asset_reconfigure" value="Reconfigure">
+              <input type="button" id="asset_destroy" value="Destroy">
+              <input type="button" id="asset_freeze" value="Freeze">
+              
+          </div>
+          <div id="right">
+              <div id="asset_box_send" >
+                  <h2>Send</h2>
+                  To<br>
+                  <input type="text" id="to" placeholder="Key">
+                  <br>
+                  Note<br>
+                  <input type="text" id="note" placeholder="Note">
+                  <br>
+                  Clawback<br>
+                  <input type="text" id="clawback" placeholder="Clawback Address (Optional)">
+                  Amount<br>
+                  <input type="number" id="amount" placeholder="micro"> <input type="button" id="send" value="Send">
+              </div>
+              <div id="asset_box_studio" style="display: none;">
+                  <h2>Create Asset</h2>
+                  <span>Asset Name<br>
+                  <input type="text" id="asset_name" placeholder=""></span>
+                  <span>Unit Name<br>
+                  <input type="text" id="unit_name" placeholder=""></span> <span>Decimals <input type="number" id="decimals" placeholder="micro"></span> <span>Total <input type="number" id="total" placeholder="micro"></span>
+                  <br>
+                  <span>URL<br>
+                  <input type="text" id="url" placeholder=""></span>
+                  <span>Clawback Address<br>
+                  <input type="text" id="clawback_address" placeholder=""></span>
+                  <span>Freeze Address<br>
+                  <input type="text" id="freeze_address" placeholder=""></span>
+                  <span>Reserve Address<br>
+                  <input type="text" id="reserve_address" placeholder=""></span>
+                  <span>Manager Address<br>
+                  <input type="text" id="manager_address" placeholder=""></span>
+                  <p id="nft" style="display: none;">
+                      Meta Data Hash<br>
+                      <input type="text" id="meta_data_hash" placeholder="(Optional)">
+                      Note<br>
+                      <textarea id="asset_note"></textarea>
+                  </p>
+                 
+                  <p><input type="button" id="send_asset" value="Send"></p>
+              </div>
+              
+              <h2>Output</h2>
+              <textarea id="wallet_output"></textarea>
+              <input type="text" id="tmp" value="">
+              <input type="hidden" id="transaction_type" value="send">
+          </div>
+    </main>
+</body>
+</html>
