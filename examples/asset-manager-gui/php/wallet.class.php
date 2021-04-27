@@ -2,10 +2,10 @@
 class Wallet{
 
     #Config
-    protected $algod_token="4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7";
+    protected $algod_token="";
     protected $algod_host="localhost";
     protected $algod_port=53898;
-    protected $kmd_token="dcb406527f3ded8464dbd56e6ea001b9b17882cfcf8194c17069bb22816307ad";
+    protected $kmd_token="";
     protected $kmd_host="localhost";
     protected $kmd_port=7833;
     protected $genesis_hash="YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=";

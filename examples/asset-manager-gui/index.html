@@ -20,11 +20,10 @@
               <input type="password" id="wallet_password" placeholder="password">
               <input type="button" id="wallet_load_keys" value="Load Keys">
               &nbsp; &nbsp;
-              <a href="../wallet-gui">Wallet / Key Manager</a>
-
-              <br>
               
-
+              <a href="../wallet-gui">Wallet / Key Manager</a>
+              
+              <br>
               <h2>Keys / From</h2>
               <select id="keys" multiple>
 
@@ -49,6 +48,7 @@
               <input type="button" id="asset_reconfigure" value="Reconfigure">
               <input type="button" id="asset_destroy" value="Destroy">
               <input type="button" id="asset_freeze" value="Freeze">
+              <input type="button" id="asset_unfreeze" value="Unfreeze">
               
           </div>
           <div id="right">
@@ -83,10 +83,13 @@
                   <span>Manager Address<br>
                   <input type="text" id="manager_address" placeholder=""></span>
                   <p id="nft" style="display: none;">
-                      Meta Data Hash<br>
+                      Meta Data Hash <input type="button" id="meta_hash" value="Get Hash" title="Get Meta Data Hash from Note Json"><br>
                       <input type="text" id="meta_data_hash" placeholder="(Optional)">
                       Note<br>
-                      <textarea id="asset_note"></textarea>
+                      <textarea id="asset_note">{
+    "type": "image",
+    "url": "http://site.com/image.jpg"   
+}</textarea>
                   </p>
                  
                   <p><input type="button" id="send_asset" value="Send"></p>

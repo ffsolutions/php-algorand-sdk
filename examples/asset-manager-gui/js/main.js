@@ -58,11 +58,13 @@ $(document).ready(function(){
       });
       $("#asset_create_nft").click(function(){
           $("#asset_box_studio h2").html("Create NFT");
-          $("#transaction_type").val("create_ntf");
+          $("#transaction_type").val("create_nft");
           $("#asset_box_send").slideUp();
           $("#asset_box_studio").slideDown();
           $("#asset_box_studio *").slideDown();
           $("#nft").slideDown();
+          $("#asset_box_studio #decimals").parent().css("display","none");
+          $("#asset_box_studio #total").parent().css("display","none");
       });
       $("#asset_reconfigure").click(function(){
           $("#asset_box_studio h2").html("Reconfigure Asset");
@@ -115,6 +117,28 @@ $(document).ready(function(){
               $("#asset_box_studio #manager_address").parent().css("display","none");
           });
           $("#nft").slideUp();
+      });
+    
+      $("#asset_unfreeze").click(function(){
+          $("#asset_box_studio h2").html("Unfreeze Account");
+          $("#transaction_type").val("unfreeze");
+          $("#asset_box_send").slideUp();
+          $("#asset_box_studio").slideDown();
+          $("#asset_box_studio *").slideDown(function(){
+              $("#asset_box_studio #asset_name").parent().css("display","none");
+              $("#asset_box_studio #unit_name").parent().css("display","none");
+              $("#asset_box_studio #decimals").parent().css("display","none");
+              $("#asset_box_studio #total").parent().css("display","none");
+              $("#asset_box_studio #url").parent().css("display","none");
+              $("#asset_box_studio #clawback_address").parent().css("display","none");
+              $("#asset_box_studio #reserve_address").parent().css("display","none");
+              $("#asset_box_studio #manager_address").parent().css("display","none");
+          });
+          $("#nft").slideUp();
+      });
+    
+      $("#meta_hash").click(function(){
+          wallet.meta_hash();
       });
 
 });
@@ -210,7 +234,7 @@ class Wallet {
      send() {
          
         var asset=$("#assets option:selected").val();
-        if(asset){
+        if(asset ||  $("#transaction_type").val()=="create_asa" || $("#transaction_type").val()=="create_nft"){
            
           $.post(this.url, {
                 action: "send",
@@ -259,5 +283,14 @@ class Wallet {
                 console.log(obj);
           });
         }
+
+     meta_hash() {
+        $.post(this.url, {
+              action: "meta_hash",
+              asset_note: $("#asset_note").val(),
+            }).done(function(data) {
+              $("#meta_data_hash").val(data);
+        });
+      }
 
 }

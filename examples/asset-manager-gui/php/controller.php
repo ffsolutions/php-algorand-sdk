@@ -151,7 +151,7 @@ switch ($action) {
                     ),
             );
             
-        }else if($transaction_type=="create_ntf"){
+        }else if($transaction_type=="create_nft"){
             $asset_note=str_replace("\n","",$asset_note);
             $asset_note=str_replace("\r","",$asset_note);
             $transaction=array(
@@ -205,6 +205,17 @@ switch ($action) {
         }else if($transaction_type=="freeze"){
             $transaction=array(
                     "txn" => array(
+                            "afrz" => true,
+                            "type" => "afrz", //Tx Type
+                            "fadd" => $freeze_address, //FreezeAccount
+                            "snd" => $key_id, //Sender
+                            "faid" => $asset_id, //FreezeAsset
+                        ),
+            );
+            
+        }else if($transaction_type=="unfreeze"){
+            $transaction=array(
+                    "txn" => array(
                             "afrz" => false,
                             "type" => "afrz", //Tx Type
                             "fadd" => $freeze_address, //FreezeAccount
@@ -215,8 +226,7 @@ switch ($action) {
             
         }
         
-        echo $wallet->json_print(json_encode($transaction));
-        exit();
+        //echo $wallet->json_print(json_encode($transaction)); exit();
         
         $wallet_token=$wallet->token($wallet_id,$wallet_password);
         
@@ -231,5 +241,17 @@ switch ($action) {
 
         exit();
      break;
+        
+    case "meta_hash":
+        $json=json_decode($asset_note);
+        if($json->url){
+            $file_content=file_get_contents($json->url);
+            $hash=strtoupper(hash('sha256',$file_content));
+            echo $hash;
+        }else{
+            echo "Json error";   
+        }
+        exit();
+        break;
 }
 ?>
