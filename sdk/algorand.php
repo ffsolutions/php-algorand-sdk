@@ -473,6 +473,8 @@ class Algorand_kmd
         if(!empty($out['txn']['close'])) { $out['txn']['close']=strval($out['txn']['close']); }
         if(!empty($out['txn']['xaid'])) { $out['txn']['xaid']=intval($out['txn']['xaid']); }
         if(!empty($out['txn']['apid'])) { $out['txn']['apid']=intval($out['txn']['apid']); }
+        if(!empty($out['txn']['faid'])) { $out['txn']['faid']=intval($out['txn']['faid']); }
+        if(!empty($out['txn']['caid'])) { $out['txn']['caid']=intval($out['txn']['caid']); }
 
 
         if(!empty($out['txn']['gh'])) { $out['txn']['gh']=b32::decode($out['txn']['gh']); }
