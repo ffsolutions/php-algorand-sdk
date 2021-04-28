@@ -101,14 +101,15 @@ https://www.youtube.com/watch?v=7ZoDY6av1-4
 
 ## Application Examples
 See at examples folder.
+
 ![Algorand Wallet PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/wallet-gui/preview.png "Algorand Wallet PHP GUI")
 https://www.youtube.com/watch?v=Ju1f5MrwJKA
 
-
+![Algorand Asset Manager PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/asset-manager-gui/preview.png)
+https://www.youtube.com/watch?v=b__DhRzAex0
 
 ![Algorand Explorer PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/explorer-gui/preview.png)
 https://www.youtube.com/watch?v=b__DhRzAex0
-
 
 
 ## Complete Guide
@@ -783,7 +784,6 @@ For details: https://developer.algorand.org/docs/features/transactions
 **afrz** = AssetFreezeTx changes the freeze status of an asset
 
 **pay** = PaymentTx indicates a payment transaction
-
 
 ### Build Transaction
 #### Application Call Transaction
