@@ -1,7 +1,7 @@
 
 ## Overview
 
-This solution describes how to create a Algorand Blockchain Explorer Application (WebApp GUI) with the new PHP Algorand SDK (native).
+This solution describes how to use and create a Algorand Blockchain Explorer Application (WebApp GUI) with the new PHP Algorand SDK (native).
 
 We use the Algorand Indexer service.
 
@@ -50,8 +50,7 @@ Include the code below in the  **index.html**  and  **css/main.css**  files:
 
 ### INDEX.HTML
 
-```
-
+```html
 <html>
 <head>
     <meta charset="UTF-8">
@@ -121,7 +120,7 @@ Include the code below in the  **index.html**  and  **css/main.css**  files:
 
 ### CSS/MAIN.CSS
 
-```
+```css
 body{
   background-color: #FFFFFF;
   font-size: 16px;
@@ -256,7 +255,7 @@ Include the code below in the  **js/main.js**  file:
 
 ### JS/MAIN.JS
 
-```
+```js
 $(document).ready(function(){
 
       explorer = new Explorer();
@@ -433,7 +432,7 @@ Include the code below in the  **php/explorer.class.php**  and  **php/controller
 
 ### PHP/EXPLORER.CLASS.PHP
 
-```
+```php
 <?php
 class Explorer{
 
@@ -698,7 +697,7 @@ class Explorer{
 
 At line 2, change to the sdk path, If you downloaded the example from github, you don’t need to do anything.
 
-```
+```php
 <?php
 include("../../../sdk/algorand.php");
 include("explorer.class.php");
@@ -854,7 +853,7 @@ switch ($action) {
 # 5- Configuring your Application
 
 Edit the file  **php/explorer.class.php**  and change adding your indexer configuration.
-```
+```php
 #Config
 protected $indexer_token="";
 protected $indexer_host="localhost";
