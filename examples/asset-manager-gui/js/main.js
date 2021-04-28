@@ -17,11 +17,11 @@ $(document).ready(function(){
       $("#key_load_assets").click(function(){
           wallet.list_assets();
       });
-    
+
       $("#keys").change(function(){
           wallet.list_assets();
       });
-    
+
       $("#transaction_info").click(function(){
           wallet.transaction_info();
       });
@@ -29,31 +29,31 @@ $(document).ready(function(){
       $("#key_balance").click(function(){
           wallet.key_balance();
       });
-    
+
       $("#asset_info").click(function(){
           wallet.asset_info();
       });
-    
+
       $("#asset_optin").click(function(){
           wallet.asset_optin();
       });
-    
+
       $("#send, #send_asset").click(function(){
           wallet.send();
       });
-    
+
       $("#asset_send").click(function(){
           $("#transaction_type").val("send");
           $("#asset_box_send").slideDown();
           $("#asset_box_studio").slideUp();
       });
-    
+
       $("#asset_create").click(function(){
           $("#asset_box_studio h2").html("Create ASA");
           $("#transaction_type").val("create_asa");
           $("#asset_box_send").slideUp();
           $("#asset_box_studio").slideDown();
-          $("#asset_box_studio *").slideDown();
+          $("#asset_box_studio *:not(#nft)").slideDown();
           $("#nft").slideUp();
       });
       $("#asset_create_nft").click(function(){
@@ -61,7 +61,7 @@ $(document).ready(function(){
           $("#transaction_type").val("create_nft");
           $("#asset_box_send").slideUp();
           $("#asset_box_studio").slideDown();
-          $("#asset_box_studio *").slideDown();
+          $("#asset_box_studio *:not(#nft)").slideDown();
           $("#nft").slideDown();
           $("#asset_box_studio #decimals").parent().css("display","none");
           $("#asset_box_studio #total").parent().css("display","none");
@@ -71,23 +71,23 @@ $(document).ready(function(){
           $("#transaction_type").val("reconfigure");
           $("#asset_box_send").slideUp();
           $("#asset_box_studio").slideDown();
-          $("#asset_box_studio *").slideDown(function(){
+          $("#asset_box_studio *:not(#nft)").slideDown(function(){
               $("#asset_box_studio #asset_name").parent().css("display","none");
               $("#asset_box_studio #unit_name").parent().css("display","none");
               $("#asset_box_studio #decimals").parent().css("display","none");
               $("#asset_box_studio #total").parent().css("display","none");
               $("#asset_box_studio #url").parent().css("display","none");
           });
-          
+
           $("#nft").slideUp();
       });
-    
+
       $("#asset_destroy").click(function(){
           $("#asset_box_studio h2").html("Destroy Asset");
           $("#transaction_type").val("destroy");
           $("#asset_box_send").slideUp();
           $("#asset_box_studio").slideDown();
-          $("#asset_box_studio *").slideDown(function(){
+          $("#asset_box_studio *:not(#nft)").slideDown(function(){
               $("#asset_box_studio #asset_name").parent().css("display","none");
               $("#asset_box_studio #unit_name").parent().css("display","none");
               $("#asset_box_studio #decimals").parent().css("display","none");
@@ -100,13 +100,13 @@ $(document).ready(function(){
           });
           $("#nft").slideUp();
       });
-    
+
       $("#asset_freeze").click(function(){
           $("#asset_box_studio h2").html("Freeze Account");
           $("#transaction_type").val("freeze");
           $("#asset_box_send").slideUp();
           $("#asset_box_studio").slideDown();
-          $("#asset_box_studio *").slideDown(function(){
+          $("#asset_box_studio *:not(#nft)").slideDown(function(){
               $("#asset_box_studio #asset_name").parent().css("display","none");
               $("#asset_box_studio #unit_name").parent().css("display","none");
               $("#asset_box_studio #decimals").parent().css("display","none");
@@ -118,13 +118,13 @@ $(document).ready(function(){
           });
           $("#nft").slideUp();
       });
-    
+
       $("#asset_unfreeze").click(function(){
           $("#asset_box_studio h2").html("Unfreeze Account");
           $("#transaction_type").val("unfreeze");
           $("#asset_box_send").slideUp();
           $("#asset_box_studio").slideDown();
-          $("#asset_box_studio *").slideDown(function(){
+          $("#asset_box_studio *:not(#nft)").slideDown(function(){
               $("#asset_box_studio #asset_name").parent().css("display","none");
               $("#asset_box_studio #unit_name").parent().css("display","none");
               $("#asset_box_studio #decimals").parent().css("display","none");
@@ -136,7 +136,7 @@ $(document).ready(function(){
           });
           $("#nft").slideUp();
       });
-    
+
       $("#meta_hash").click(function(){
           wallet.meta_hash();
       });
@@ -201,7 +201,7 @@ class Wallet {
         });
       }
 
-        
+
      list_assets() {
         $.post(this.url, {
               action: "list_assets",
@@ -209,7 +209,7 @@ class Wallet {
               wallet_password: $("#wallet_password").val(),
               key_id: $("#keys option:selected").val(),
             }).done(function( data ) {
-              
+
               var obj = $.parseJSON(data);
               console.log(obj);
               $("#assets").html("");
@@ -232,10 +232,10 @@ class Wallet {
       }
 
      send() {
-         
+
         var asset=$("#assets option:selected").val();
         if(asset ||  $("#transaction_type").val()=="create_asa" || $("#transaction_type").val()=="create_nft"){
-           
+
           $.post(this.url, {
                 action: "send",
                 wallet_id: $("#wallets option:selected").val(),
@@ -258,14 +258,14 @@ class Wallet {
                 manager_address: $("#manager_address").val(),
                 meta_data_hash: $("#meta_data_hash").val(),
                 asset_note: $("#asset_note").val(),
-               
+
               }).done(function( data ) {
                 $("#wallet_output").val(data);
                 var obj = $.parseJSON(data);
                 console.log(obj);
           });
         }else{
-            alert("Select an Asset.");   
+            alert("Select an Asset.");
         }
      }
 
@@ -276,7 +276,7 @@ class Wallet {
                 key_id: $("#keys option:selected").val(),
                 wallet_password: $("#wallet_password").val(),
                 asset_id: $("#asset_id").val(),
-              
+
               }).done(function( data ) {
                 $("#wallet_output").val(data);
                 var obj = $.parseJSON(data);
