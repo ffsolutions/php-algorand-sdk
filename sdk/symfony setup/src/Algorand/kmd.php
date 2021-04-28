@@ -274,6 +274,8 @@ class kmd
         if(!empty($out['txn']['apar']['f'])) { $out['txn']['apar']['f']=b32::decode($out['txn']['apar']['f']); }
         if(!empty($out['txn']['apar']['m'])) { $out['txn']['apar']['m']=b32::decode($out['txn']['apar']['m']); }
         if(!empty($out['txn']['apar']['r'])) { $out['txn']['apar']['r']=b32::decode($out['txn']['apar']['r']); }
+        if(!empty($out['txn']['apar']['dc'])) { $out['txn']['apar']['dc']=intval($out['txn']['apar']['dc']); }
+        if(!empty($out['txn']['apar']['t'])) { $out['txn']['apar']['t']=intval($out['txn']['apar']['t']); }
 
 
         $out=$msgpack->p($out['txn']);
