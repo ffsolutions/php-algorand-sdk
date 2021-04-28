@@ -106,7 +106,7 @@ See at examples folder.
 https://www.youtube.com/watch?v=Ju1f5MrwJKA
 
 ![Algorand Asset Manager PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/asset-manager-gui/preview.png)
-https://www.youtube.com/watch?v=b__DhRzAex0
+https://www.youtube.com/watch?v=MM7Xm93fcKE
 
 ![Algorand Explorer PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/explorer-gui/preview.png)
 https://www.youtube.com/watch?v=b__DhRzAex0
