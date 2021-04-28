@@ -49,7 +49,7 @@ Include the code below in the  **index.html**  and  **css/main.css**  files:
 
 ### INDEX.HTML
 
-```
+```html
 <html>
 <head>
     <meta charset="UTF-8">
@@ -111,7 +111,7 @@ Include the code below in the  **index.html**  and  **css/main.css**  files:
 
 ### CSS/MAIN.CSS
 
-```
+```css
 body{
   background-color: #FFFFFF;
   font-size: 16px;
@@ -177,7 +177,7 @@ Include the code below in the  **js/main.js**  file:
 
 ### JS/MAIN.JS
 
-```
+```js
 $(document).ready(function(){
 
       wallet = new Wallet();
@@ -386,15 +386,15 @@ Include the code below in the  **php/wallet.class.php**  and  **php/controller.p
 
 ### PHP/WALLET.CLASS.PHP
 
-```
+```php
 <?php
 class Wallet{
 
     #Config
-    protected $algod_token="4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7";
+    protected $algod_token="";
     protected $algod_host="localhost";
     protected $algod_port=53898;
-    protected $kmd_token="dcb406527f3ded8464dbd56e6ea001b9b17882cfcf8194c17069bb22816307ad";
+    protected $kmd_token="";
     protected $kmd_host="localhost";
     protected $kmd_port=7833;
     protected $genesis_hash="YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=";
@@ -692,7 +692,7 @@ class Wallet{
 
 At line 2, change to the sdk path, If you downloaded the example from github, you don’t need to do anything.
 
-```
+```php
 <?php
 include("../../../sdk/algorand.php");
 include("wallet.class.php");
@@ -787,7 +787,7 @@ switch ($action) {
 # 5- Configuring your Application
 
 Edit the file  **php/wallet.class.php**  and change adding your node configuration.
-```
+```php
 #Config
 protected $algod_token="{ALGOD_TOKEN}";
 protected $algod_host="{YOUR_HOST}";
