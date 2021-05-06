@@ -252,8 +252,7 @@ class kmd
         if(!empty($out['txn']['faid'])) { $out['txn']['faid']=intval($out['txn']['faid']); }
         if(!empty($out['txn']['caid'])) { $out['txn']['caid']=intval($out['txn']['caid']); }
 
-
-        if(!empty($out['txn']['gh'])) { $out['txn']['gh']=b32::decode($out['txn']['gh']); }
+        if(!empty($out['txn']['gh'])) { $out['txn']['gh']=base64_decode($out['txn']['gh']); }
         if(!empty($out['txn']['grp'])) { $out['txn']['grp']=b32::decode($out['txn']['grp']); }
         if(!empty($out['txn']['snd'])) { $out['txn']['snd']=b32::decode($out['txn']['snd']); }
         if(!empty($out['txn']['rcv'])) { $out['txn']['rcv']=b32::decode($out['txn']['rcv']); }

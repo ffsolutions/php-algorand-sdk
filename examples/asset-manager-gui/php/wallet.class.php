@@ -8,7 +8,7 @@ class Wallet{
     protected $kmd_token="";
     protected $kmd_host="localhost";
     protected $kmd_port=7833;
-    protected $genesis_hash="YBQ4JWH4DW655UWXMBF6IVUOH5WQIGMHVQ333ZFWEC22WOJERLPQ=";
+    protected $genesis_hash="wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=";
     protected $genesis_id="mainnet-v1.0";
     public $algod;
     public $kmd;
