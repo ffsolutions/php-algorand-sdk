@@ -4,8 +4,8 @@
 
 namespace App\Algorand;
 
-use App\Algorand\b32;
-use App\Algorand\msgpack;
+use app\Algorand\b32;
+use app\Algorand\msgpack;
 
 class indexer
 {

@@ -36,11 +36,12 @@ class b32 {
 
     public static function decode($base32String) {
 
+
         $base32String = strtoupper($base32String); $base32String = preg_replace(static::B2HEXP, '', $base32String);
 
         if ('' === $base32String || null === $base32String) { return ''; }
 
-        $decoded = ''; $len = strlen($base32String); $n = 0; $bitLen = 5; $val = static::MAPP[$base32String[0]];
+        $decoded = ''; $len = strlen($base32String)-6; $n = 0; $bitLen = 5; $val = static::MAPP[$base32String[0]];
 
         while ($n < $len) {
 
