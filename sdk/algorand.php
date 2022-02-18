@@ -463,9 +463,11 @@ class Algorand_kmd
         if(!empty($out['txn']['gh'])) { $out['txn']['gh']=strval($out['txn']['gh']); }
         if(!empty($out['txn']['grp'])) { $out['txn']['grp']=strval($out['txn']['grp']); }
         if(!empty($out['txn']['lv'])) { $out['txn']['lv']=intval($out['txn']['lv']); }
-        if(!empty($out['txn']['note'])) { $out['txn']['note']=strval($out['txn']['note']); }
+
+        if(!empty($out['txn']['note'])) { $out['txn']['note']=$msgpack->pBin(utf8_encode(strval($out['txn']['note']))); }
+
         if(!empty($out['txn']['gp'])) { $out['txn']['gp']=strval($out['txn']['gp']); }
-        if(!empty($out['txn']['rekey'])) { $out['txn']['rekey']=strval($out['txn']['rekey']); }
+        if(!empty($out['txn']['rekey'])) { $out['txn']['rekey']=b32::decode($out['txn']['rekey']); }
         if(!empty($out['txn']['type'])) { $out['txn']['type']=strval($out['txn']['type']); }
         if(!empty($out['txn']['rcv'])) { $out['txn']['rcv']=strval($out['txn']['rcv']); }
         if(!empty($out['txn']['amt'])) { $out['txn']['amt']=intval($out['txn']['amt']); }
@@ -477,7 +479,6 @@ class Algorand_kmd
         if(!empty($out['txn']['caid'])) { $out['txn']['caid']=intval($out['txn']['caid']); }
 
         if(!empty($out['txn']['gh'])) { $out['txn']['gh']=base64_decode($out['txn']['gh']); }
-        if(!empty($out['txn']['grp'])) { $out['txn']['grp']=b32::decode($out['txn']['grp']); }
         if(!empty($out['txn']['snd'])) { $out['txn']['snd']=b32::decode($out['txn']['snd']); }
         if(!empty($out['txn']['rcv'])) { $out['txn']['rcv']=b32::decode($out['txn']['rcv']); }
         if(!empty($out['txn']['close'])) { $out['txn']['close']=b32::decode($out['txn']['close']); }
@@ -500,8 +501,13 @@ class Algorand_kmd
         if(!empty($out['txn']['apar']['dc'])) { $out['txn']['apar']['dc']=intval($out['txn']['apar']['dc']); }
         if(!empty($out['txn']['apar']['t'])) { $out['txn']['apar']['t']=intval($out['txn']['apar']['t']); }
 
+        $out['txn']=array_filter($out['txn'], fn($val) =>! is_null($val) AND $val !== "" AND $val !==0 AND $val !== false);
+
 
         $out=$msgpack->p($out['txn']);
+
+        $out=str_replace("c418c416","c416",bin2hex($out));
+        $out=hex2bin($out);
         if($opt_msgpack==false){
             $out=base64_encode($out);
         }
@@ -533,9 +539,6 @@ class Algorand_kmd
 
         $encoded=$msgpack->p($group_list);
         $gid = hash('sha512/256',"TG".$encoded,true);
-
-        $gid = b32::encode($gid);
-
 
         return $gid;
     }
@@ -822,11 +825,12 @@ class b32 {
 
     public static function decode($base32String) {
 
+
         $base32String = strtoupper($base32String); $base32String = preg_replace(static::B2HEXP, '', $base32String);
 
         if ('' === $base32String || null === $base32String) { return ''; }
 
-        $decoded = ''; $len = strlen($base32String); $n = 0; $bitLen = 5; $val = static::MAPP[$base32String[0]];
+        $decoded = ''; $len = strlen($base32String)-6; $n = 0; $bitLen = 5; $val = static::MAPP[$base32String[0]];
 
         while ($n < $len) {
 
@@ -854,7 +858,7 @@ class msgpack
     private const UTF8_REGEX = '/\A(?: [\x00-\x7F]++  | [\xC2-\xDF][\x80-\xBF]  |  \xE0[\xA0-\xBF][\x80-\xBF]  | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  |  \xED[\x80-\x9F][\x80-\xBF]   |  \xF0[\x90-\xBF][\x80-\xBF]{2}  | [\xF1-\xF3][\x80-\xBF]{3}   |  \xF4[\x80-\x8F][\x80-\xBF]{2} )*+\z/x';
 
     private $fDStrBin=true;
-    private $fFStr=true;
+    private $fFStr=false;
     private $fDArrMap=true;
     private $fFArr=true;
     private $fFF32=true;
