@@ -501,7 +501,8 @@ class Algorand_kmd
         if(!empty($out['txn']['apar']['dc'])) { $out['txn']['apar']['dc']=intval($out['txn']['apar']['dc']); }
         if(!empty($out['txn']['apar']['t'])) { $out['txn']['apar']['t']=intval($out['txn']['apar']['t']); }
 
-        $out['txn']=array_filter($out['txn'], fn($val) =>! is_null($val) AND $val !== "" AND $val !==0 AND $val !== false);
+        //$out['txn']=array_filter($out['txn'], fn($val) => !is_null($val) AND $val !== "" AND $val !==0 AND $val !== false); // PHP 7.4 and later
+        $out['txn']=array_filter($out['txn'], function($val) { return !is_null($val) AND $val !== '' AND $val !==0 AND $val !== false; }); // PHP 7.2 and later
 
 
         $out=$msgpack->p($out['txn']);
