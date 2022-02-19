@@ -240,7 +240,7 @@ class kmd
         if(!empty($out['txn']['grp'])) { $out['txn']['grp']=strval($out['txn']['grp']); }
         if(!empty($out['txn']['lv'])) { $out['txn']['lv']=intval($out['txn']['lv']); }
 
-        if(!empty($out['txn']['note'])) { $out['txn']['note']=$msgpack->pBin(utf8_encode(strval($out['txn']['note']))); }
+        if(!empty($out['txn']['note'])) { $out['txn']['note']=utf8_encode(strval($out['txn']['note'])); }
 
         if(!empty($out['txn']['gp'])) { $out['txn']['gp']=strval($out['txn']['gp']); }
         if(!empty($out['txn']['rekey'])) { $out['txn']['rekey']=b32::decode($out['txn']['rekey']); }
@@ -283,7 +283,7 @@ class kmd
 
         $out=$msgpack->p($out['txn']);
 
-        $out=str_replace("c418c416","c416",bin2hex($out));
+        $out=str_replace("6e6f7465d9","6e6f7465c4",bin2hex($out));
         $out=hex2bin($out);
         if($opt_msgpack==false){
             $out=base64_encode($out);

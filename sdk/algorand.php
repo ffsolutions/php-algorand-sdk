@@ -456,7 +456,6 @@ class Algorand_kmd
         ksort($out['txn']);
 
 
-
         if(!empty($out['txn']['fee'])) { $out['txn']['fee']=intval($out['txn']['fee']); }
         if(!empty($out['txn']['fv'])) { $out['txn']['fv']=intval($out['txn']['fv']); }
         if(!empty($out['txn']['gen'])) { $out['txn']['gen']=strval($out['txn']['gen']); }
@@ -464,7 +463,7 @@ class Algorand_kmd
         if(!empty($out['txn']['grp'])) { $out['txn']['grp']=strval($out['txn']['grp']); }
         if(!empty($out['txn']['lv'])) { $out['txn']['lv']=intval($out['txn']['lv']); }
 
-        if(!empty($out['txn']['note'])) { $out['txn']['note']=$msgpack->pBin(utf8_encode(strval($out['txn']['note']))); }
+        if(!empty($out['txn']['note'])) { $out['txn']['note']=utf8_encode(strval($out['txn']['note'])); }
 
         if(!empty($out['txn']['gp'])) { $out['txn']['gp']=strval($out['txn']['gp']); }
         if(!empty($out['txn']['rekey'])) { $out['txn']['rekey']=b32::decode($out['txn']['rekey']); }
@@ -504,10 +503,9 @@ class Algorand_kmd
         //$out['txn']=array_filter($out['txn'], fn($val) => !is_null($val) AND $val !== "" AND $val !==0 AND $val !== false); // PHP 7.4 and later
         $out['txn']=array_filter($out['txn'], function($val) { return !is_null($val) AND $val !== '' AND $val !==0 AND $val !== false; }); // PHP 7.2 and later
 
-
         $out=$msgpack->p($out['txn']);
 
-        $out=str_replace("c418c416","c416",bin2hex($out));
+        $out=str_replace("6e6f7465d9","6e6f7465c4",bin2hex($out));
         $out=hex2bin($out);
         if($opt_msgpack==false){
             $out=base64_encode($out);
@@ -529,7 +527,7 @@ class Algorand_kmd
        $total=count($transactions);
        $txids=array();
        for($x=0; $x<$total; $x++){
-          $raw_txn=$this->txn_encode($transactions[$x],true);
+          $raw_txn=$this->txn_encode($transactions[$x],true,true);
           $raw_txn=hash('sha512/256',"TX".$raw_txn,true);
           $txids[$x]=$raw_txn;
        }
