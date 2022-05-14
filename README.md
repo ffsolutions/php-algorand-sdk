@@ -38,12 +38,14 @@ $ ./algorand-indexer daemon -h -d data
 
 After cloning the repository, you need to include the `php-algorand-sdk`:
 ```php
-include('sdk/algorand.php');
+require_once 'sdk/algorand.php';
+require_once 'sdk/algokey.php';
 
 #OR with namespace include
 
 use App\Algorand\algod;
 use App\Algorand\kmd;
+use App\Algorand\algokey;
 use App\Algorand\indexer;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
@@ -101,6 +103,7 @@ https://www.youtube.com/watch?v=7ZoDY6av1-4
 
 ## Application Examples
 See at examples folder.
+https://github.com/ffsolutions/php-algorand-sdk/tree/main/examples
 
 ![Algorand Wallet PHP GUI](https://raw.githubusercontent.com/ffsolutions/php-algorand-sdk/main/examples/wallet-gui/preview.png "Algorand Wallet PHP GUI")
 https://www.youtube.com/watch?v=Ju1f5MrwJKA
@@ -257,12 +260,14 @@ $ git clone https://github.com/ffsolutions/php-algorand-sdk.git
 
 After cloning the repository, you need to include the `php-algorand-sdk`:
 ```php
-include('sdk/algorand.php');
+require_once 'sdk/algorand.php';
+require_once 'sdk/algokey.php';
 
 #OR with namespace include
 
 use App\Algorand\algod;
 use App\Algorand\kmd;
+use App\Algorand\algokey;
 use App\Algorand\indexer;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
