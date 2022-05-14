@@ -92,6 +92,7 @@ $return=$algorand_kmd->delete("v1","key",$params);
 */
 
 #Export a key
+
 /*
 $params['params']=array(
     "address" => "XI56XZXQ64QD7IO5UBRC2RBZP6TQHP5WEILLFMBTKPXRKK7343R3KZAWNQ",
@@ -99,17 +100,33 @@ $params['params']=array(
     "wallet_handle_token" => $wallet_handle_token
 );
 $return=$algorand_kmd->post("v1","key","export",$params);
+
+$export=json_decode($return['response']);
+
+require_once 'sdk/algokey.php';
+$algokey=new algokey;
+
+$words=$algokey->privateKeyToWords($export->private_key);
+
+print_r($words);
 */
 
 #Import a key
 /*
+require_once 'sdk/algokey.php';
+
+$algokey=new algokey;
+$words="ripple trap smoke crop name donor sun actor wreck disease mushroom sweet because phrase involve sail umbrella control swing uncle card phrase human absent marble";
+$words_array=explode(" ",$words);
+
+$privatekey=$algokey->WordsToprivateKey($words_array);
+
 $params['params']=array(
-    "private_key" => "eGTs9KCLHSUcf2JUIUV7EIkjH2dQQX3AyeGUDZ7MfM26O+vm8PcgP6HdoGItRDl/pwO/tiIWsrAzU+8VK/vm4w==",
+    "private_key" => $privatekey,
     "wallet_handle_token" => $wallet_handle_token
 );
 $return=$algorand_kmd->post("v1","key","import",$params);
 */
-
 #List keys in wallet
 /*
 $params['params']=array(

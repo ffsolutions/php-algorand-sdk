@@ -6,6 +6,7 @@ namespace App\Algorand;
 
 use App\Algorand\b32;
 use App\Algorand\msgpack;
+use App\Algorand\algokey;
 
 class kmd
 {
