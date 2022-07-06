@@ -241,7 +241,7 @@ class kmd
         if(!empty($out['txn']['grp'])) { $out['txn']['grp']=strval($out['txn']['grp']); }
         if(!empty($out['txn']['lv'])) { $out['txn']['lv']=intval($out['txn']['lv']); }
 
-        if(!empty($out['txn']['note'])) { $out['txn']['note']=utf8_encode(strval($out['txn']['note'])); }
+        if(!empty($out['txn']['note'])) { $out['txn']['note']=$msgpack->pBin(utf8_encode(strval($out['txn']['note']))); }
 
         if(!empty($out['txn']['gp'])) { $out['txn']['gp']=strval($out['txn']['gp']); }
         if(!empty($out['txn']['rekey'])) { $out['txn']['rekey']=b32::decode($out['txn']['rekey']); }
@@ -278,14 +278,13 @@ class kmd
         if(!empty($out['txn']['apar']['dc'])) { $out['txn']['apar']['dc']=intval($out['txn']['apar']['dc']); }
         if(!empty($out['txn']['apar']['t'])) { $out['txn']['apar']['t']=intval($out['txn']['apar']['t']); }
 
-        //$out['txn']=array_filter($out['txn'], fn($val) => !is_null($val) AND $val !== "" AND $val !==0 AND $val !== false); // PHP 7.4 and later
-        $out['txn']=array_filter($out['txn'], function($val) { return !is_null($val) AND $val !== '' AND $val !==0 AND $val !== false; }); // PHP 7.2 and later
-
+        $out['txn']=array_filter($out['txn'], function($val) { return !is_null($val) AND $val !== '' AND $val !==0 AND $val !== false; }); 
 
         $out=$msgpack->p($out['txn']);
 
-        $out=str_replace("6e6f7465d9","6e6f7465c4",bin2hex($out));
+        $out=bin2hex($out);
         $out=hex2bin($out);
+        
         if($opt_msgpack==false){
             $out=base64_encode($out);
         }
