@@ -1,6 +1,6 @@
-# PHP Algorand SDK (algod, algokey, kmd, transactions and indexer)
+# PHP Algorand SDK 2.0 (algod, algokey, kmd, transactions and indexer)
 
-A PHP library for interacting with the Algorand network.
+A Pure PHP (no dependencies) library for interacting with the Algorand network.
 
 All files in this directory will show you about the best pratices that you should do when implementing  **php-algorand-sdk** into your project.
 
