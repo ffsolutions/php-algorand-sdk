@@ -8,9 +8,11 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 
-use app\Algorand\algod;
-use app\Algorand\kmd;
-use app\Algorand\indexer;
+use app\Algorand\algorand;
+use app\Algorand\transactions;
+use app\Algorand\b32;
+use app\Algorand\msgpack;
+use app\Algorand\algokey;
 
 
 class SiteController extends Controller
@@ -76,10 +78,12 @@ class SiteController extends Controller
     public function actionAlgod()
     {
 
-        $algorand = new algod('{algod-token}',"localhost",53898);
+        $algorand = new Algorand("algod","4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7","localhost",53898);
         $algorand->debug(1);
 
         #Gets the current node status.
+        //$return=$algorand->get("v2","status");
+
         $return=$algorand->get("v2","status");
 
         #See all Algorand SDK Functions at: https://github.com/ffsolutions/php-algorand-sdk
@@ -106,13 +110,16 @@ class SiteController extends Controller
     public function actionKmd()
     {
 
-        $algorand_kmd = new kmd('{kmd-token}',"localhost",7833);
+        $algorand_kmd = new Algorand("kmd","dcb406527f3ded8464dbd56e6ea001b9b17882cfcf8194c17069bb22816307ad","localhost",7833);
         $algorand_kmd->debug(1);
 
         #Get Versions
-        $return=$algorand_kmd->get("versions");
+        //$return=$algorand_kmd->get("versions");
+
 
         #See all Algorand SDK Functions at: https://github.com/ffsolutions/php-algorand-sdk
+
+        $return=$algorand_kmd->get("v1","wallets");
 
         #Full response with debug (json response)
         if(!empty($return)){
@@ -136,7 +143,7 @@ class SiteController extends Controller
     public function actionIndexer()
     {
 
-        $algorand_indexer = new indexer('',"localhost",8980);
+        $algorand_indexer = new Algorand("indexer","{indexer-token}","localhost",8980);
         $algorand_indexer->debug(1);
 
         #Get health, Returns 200 if healthy.

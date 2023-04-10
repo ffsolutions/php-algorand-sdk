@@ -22,7 +22,7 @@ The procedure is similar for other frameworks. In the **sdk** folder you will fi
 -   PHP 7.3 and above.
 -   Built-in libcurl support.
 -   PHP Algorand SDK
--   Algorand node (algod, kmd and indexer services running)
+-   Algorand node (algod, kmd and indexer services running) or PureStake
 
 Complete PHP Algorand SDK references and examples at:  [https://github.com/ffsolutions/php-algorand-sdk](https://github.com/ffsolutions/php-algorand-sdk)
 
@@ -36,9 +36,9 @@ https://www.youtube.com/watch?v=gaUSnZZIH7o
 
 After cloning the repository, you need to include the `php-algorand-sdk` in your project :
 ```php
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 ```
@@ -46,13 +46,16 @@ use App\Algorand\msgpack;
 Create a new object from the classes:
 ```php
 #Algod
-$algorand = new algod('{algod-token}',"localhost",53898);
+$algorand = new Algorand("algod","{algod-token}","localhost",53898);
 
 #Kmd
-$algorand_kmd = new kmd('{kmd-token}',"localhost",64988);
+$algorand_kmd = new Algorand("kmd","{kmd-token}","localhost",64988);
 
 #indexer
-$algorand_indexer = new indexer('{algorand-indexer-token}',"localhost",8089);
+$algorand_indexer = new Algorand("indexer","{algorand-indexer-token}","localhost",8089);
+
+#transactions
+$algorand_transactions = new  Algorand_transactions;
 ```
 
 # Codeigniter
@@ -66,9 +69,9 @@ $algorand_indexer = new indexer('{algorand-indexer-token}',"localhost",8089);
 
 namespace App\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -76,7 +79,7 @@ class AlgodController extends BaseController
 {
 	public function index()
 	{
-		  $algorand = new algod('{algod-token}',"localhost",53898);
+		  $algorand = new Algorand("algod","{algod-token}","localhost",53898);
       $algorand->debug(1);
 
       #Get the status
@@ -106,9 +109,9 @@ class AlgodController extends BaseController
 <?php
 namespace App\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -116,7 +119,7 @@ class KmdController extends BaseController
 {
 	public function index()
 	{
-		  $algorand_kmd = new kmd('{kmd-token}',"localhost",7833);
+		  $algorand_kmd = new Algorand("kmd","{kmd-token}","localhost",64988);
       $algorand_kmd->debug(1);
 
 			#Get Versions
@@ -147,9 +150,9 @@ class KmdController extends BaseController
 <?php
 namespace App\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -157,7 +160,7 @@ class IndexerController extends BaseController
 {
 	public function index()
 	{
-		  $algorand_indexer = new indexer('',"localhost",8980);
+		  $algorand_indexer = new Algorand("indexer","{algorand-indexer-token}","localhost",8089);
       $algorand_indexer->debug(1);
 
 	  #Get Versions
@@ -209,9 +212,9 @@ $routes->get('/indexer', 'IndexerController::index');
 <?php
 namespace App\Http\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -221,7 +224,7 @@ class AlgodController extends Controller
     public function index()
     {
 
-      $algorand = new algod('{algod-token}',"localhost",53898);
+      $algorand = new Algorand("algod","{algod-token}","localhost",53898);
       $algorand->debug(1);
 
       #Get the versions
@@ -251,9 +254,9 @@ class AlgodController extends Controller
 <?php
 namespace App\Http\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -263,7 +266,7 @@ class KmdController extends Controller
     public function index()
     {
 
-      $algorand_kmd = new kmd('{kmd-token}',"localhost",7833);
+      $algorand_kmd = new Algorand("kmd","{kmd-token}","localhost",64988);
       $algorand_kmd->debug(1);
 
       #Get Versions
@@ -294,9 +297,9 @@ class KmdController extends Controller
 <?php
 namespace App\Http\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -306,7 +309,7 @@ class IndexerController extends Controller
     public function index()
     {
 
-      $algorand_indexer = new indexer('',"localhost",8980);
+      $algorand_indexer = new Algorand("indexer","{algorand-indexer-token}","localhost",8089);
       $algorand_indexer->debug(1);
 
       #Get health, Returns 200 if healthy.
@@ -363,9 +366,9 @@ Route::get('/', function () {
 <?php
 namespace App\Http\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -375,7 +378,7 @@ class AlgodController extends Controller
     public function index()
     {
 
-      $algorand = new algod('{algod-token}',"localhost",53898);
+      $algorand = new Algorand("algod","{algod-token}","localhost",53898);
       $algorand->debug(1);
 
       #Get the versions
@@ -404,9 +407,9 @@ class AlgodController extends Controller
 <?php
 namespace App\Http\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -416,7 +419,7 @@ class KmdController extends Controller
     public function index()
     {
 
-      $algorand_kmd = new kmd('{kmd-token}',"localhost",7833);
+      $algorand_kmd = new Algorand("kmd","{kmd-token}","localhost",64988);
       $algorand_kmd->debug(1);
 
       #Get Versions
@@ -447,9 +450,9 @@ class KmdController extends Controller
 <?php
 namespace App\Http\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -459,7 +462,7 @@ class IndexerController extends Controller
     public function index()
     {
 
-      $algorand_indexer = new indexer('',"localhost",8980);
+      $algorand_indexer = new Algorand("indexer","{algorand-indexer-token}","localhost",8089);
       $algorand_indexer->debug(1);
 
       #Get health, Returns 200 if healthy.
@@ -525,9 +528,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -550,7 +553,7 @@ class DefaultController extends AbstractController
     public function AlgorandAlgod(): Response
     {
 
-      $algorand = new algod('{algod-token}',"localhost",53898);
+      $algorand = new Algorand("algod","{algod-token}","localhost",53898);
       $algorand->debug(1);
 
       #Gets the current node status.
@@ -581,7 +584,7 @@ class DefaultController extends AbstractController
     public function AlgorandKmd(): Response
     {
 
-      $algorand_kmd = new kmd('{kmd-token}',"localhost",7833);
+      $algorand_kmd = new Algorand("kmd","{kmd-token}","localhost",64988);
       $algorand_kmd->debug(1);
 
       #Gets the current node status.
@@ -613,7 +616,7 @@ class DefaultController extends AbstractController
     public function AlgorandIndexer(): Response
     {
 
-      $algorand_indexer = new indexer('',"localhost",8980);
+      $algorand_indexer = new Algorand("indexer","{algorand-indexer-token}","localhost",8089);
       $algorand_indexer->debug(1);
 
       #Get health, Returns 200 if healthy.
@@ -665,9 +668,7 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 
-use app\Algorand\algod;
-use app\Algorand\kmd;
-use app\Algorand\indexer;
+use App\Algorand\algorand;
 
 
 class SiteController extends Controller
@@ -733,7 +734,7 @@ class SiteController extends Controller
     public function actionAlgod()
     {
 
-        $algorand = new algod('{algod-token}',"localhost",53898);
+        $algorand = new Algorand("algod","{algod-token}","localhost",53898);
         $algorand->debug(1);
 
         #Gets the current node status.
@@ -763,7 +764,7 @@ class SiteController extends Controller
     public function actionKmd()
     {
 
-        $algorand_kmd = new kmd('{kmd-token}',"localhost",7833);
+        $algorand_kmd = new Algorand("kmd","{kmd-token}","localhost",64988);
         $algorand_kmd->debug(1);
 
         #Get Versions
@@ -793,7 +794,7 @@ class SiteController extends Controller
     public function actionIndexer()
     {
 
-        $algorand_indexer = new indexer('',"localhost",8980);
+        $algorand_indexer = new Algorand("indexer","{algorand-indexer-token}","localhost",8089);
         $algorand_indexer->debug(1);
 
         #Get health, Returns 200 if healthy.

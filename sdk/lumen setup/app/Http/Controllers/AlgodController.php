@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -14,7 +14,7 @@ class AlgodController extends Controller
     public function index()
     {
 
-      $algorand = new algod('{algod-token}',"localhost",53898);
+      $algorand = new Algorand("algod","4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7","localhost",53898);
       $algorand->debug(1);
 
       #Get the versions

@@ -9,7 +9,7 @@ class Explorer{
 
 
     public function indexer_init(){
-       $this->indexer=new Algorand_indexer($this->indexer_token,$this->indexer_host,$this->indexer_port);
+       $this->indexer=new Algorand("indexer",$this->indexer_token,$this->indexer_host,$this->indexer_port);
     }
 
     public function health(){

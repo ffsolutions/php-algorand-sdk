@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Algorand\algod;
-use App\Algorand\kmd;
-use App\Algorand\indexer;
+use App\Algorand\algorand;
+use App\Algorand\transactions;
+use App\Algorand\algokey;
 use App\Algorand\b32;
 use App\Algorand\msgpack;
 
@@ -12,7 +12,7 @@ class IndexerController extends BaseController
 {
 	public function index()
 	{
-		  $algorand_indexer = new indexer('',"localhost",8980);
+		  $algorand_indexer = new Algorand("indexer","{indexer-token}","localhost",8980);
       $algorand_indexer->debug(1);
 
 			#Get Versions

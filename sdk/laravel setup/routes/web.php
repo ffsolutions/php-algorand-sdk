@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-
+#Laravel Method Setup
 use App\Http\Controllers\AlgodController;
 use App\Http\Controllers\KmdController;
 use App\Http\Controllers\IndexerController;
@@ -19,10 +19,14 @@ use App\Http\Controllers\IndexerController;
 |
 */
 
+#Laravel Method Setup
 Route::get('/algod', [AlgodController::class, 'index']);
 Route::get('/kmd', [KmdController::class, 'index']);
 Route::get('/indexer', [IndexerController::class, 'index']);
+Route::get('/transactions', [IndexerController::class, 'transactions']);
 
+#Simple Native Method Setup
 Route::get('/', function () {
-    echo "Access: /algod, /kmd or /indexer";
+
+  
 });

@@ -1,9 +1,19 @@
 <?php
 include("../../../sdk/algorand.php");
 include("wallet.class.php");
+
+$algod_token="4820e6e45f339e0026eaa2b74c2aa7d8735cbcb2db0cf0444fb492892e1c09b7";
+$algod_host="localhost";
+$algod_port=53898;
+$kmd_token="dcb406527f3ded8464dbd56e6ea001b9b17882cfcf8194c17069bb22816307ad";
+$kmd_host="localhost";
+$kmd_port=7833;
+
 $wallet=new Wallet;
-$wallet->algod_init();
-$wallet->kmd_init();
+$wallet->kmd_init($kmd_token,$kmd_host,$kmd_port);
+
+$algod=new Algorand("algod",$algod_token,$algod_host,$algod_port);
+$algorand_transactions = new Algorand_transactions;
 
 
 $action=$_POST['action'];
@@ -45,7 +55,7 @@ switch ($action) {
       break;
 
   case 'key_balance':
-          $return=$wallet->key_balance($key_id);
+          $return=$algod->get("v2","accounts",$key_id);
           echo $wallet->json_print($return['response']);
           exit();
       break;
@@ -58,40 +68,57 @@ switch ($action) {
       break;
         
   case 'list_assets':
-          $return=$wallet->asset_list($key_id);
-          echo $wallet->json_print($return);
-          exit();
+        //List Assets
+        $assets=$algod->get("v2","accounts",$key_id);
+        $assets_array=json_decode($assets['response']);
+        
+        //Format with Asset name
+        $array_return=array();
+        $array_return[-1]="ALGO = amount: ".$assets_array->amount;
+        foreach ($assets_array->assets as $key => $value){
+            $asset_id=intval($value->{'asset-id'});
+            if($asset_id>0){
+            $array=$algod->get("v2","assets",$asset_id);
+            $array=json_decode($array['response']);
+                if($array->params->name!=null){
+                    $array_return[$asset_id]=$array->params->name." - id: ".$array->index." = amount: ".$value->amount;
+                }
+            }
+        } 
+        
+        $json=json_encode($array_return);
+
+        echo $wallet->json_print($json);
+        exit();
       break;
         
   case 'asset_info':
-          $return=$wallet->asset_info($asset_id);
+          $return=$algod->get("v2","assets",$asset_id);
           echo $wallet->json_print($return['response']);
           exit();
       break;
-
-   case 'asset_optin':
-        $wallet_token=$wallet->token($wallet_id,$wallet_password);
-        
-        $transaction=array(
-            "txn" => array(
-                "type" => "axfer", //Tx Type
-                "arcv" => $key_id, //AssetReceiver
-                "xaid" => $asset_id, //XferAsset ID
-            ),
-        );
-        
-        $return=$wallet->send($wallet_token,$wallet_password,$key_id,$transaction);
        
-        if($return['response']){
-            echo $wallet->json_print($return['response']);
-        }
-        if($return['message']){
-            echo $wallet->json_print($return['message']);
-        }
-
-        exit();       
         
   case 'send':
+        
+
+        #Get parameters for constructing a new transaction
+        $param_return=$algod->get("v2","transactions","params");
+
+        if($param_return['code']==200){
+        $transaction_param=json_decode($param_return['response']);
+        }else{
+        return $param_return;
+        }
+
+        $fee=$transaction_param->{'min-fee'};
+        $fv=$transaction_param->{'last-round'};
+        $genesis_id=$transaction_param->{'genesis-id'};
+        $genesis_hash=$transaction_param->{'genesis-hash'};
+        $lv=$fv+1000;
+
+
+
         if($transaction_type=="send"){
             if($asset_id=="-1"){ //ALGO
                 $transaction=array(
@@ -224,13 +251,55 @@ switch ($action) {
                         ),
             );
             
+        }else if($transaction_type=="opt-in"){
+            $transaction=array(
+                "txn" => array(
+                    "type" => "axfer", //Tx Type
+                    "arcv" => $key_id, //AssetReceiver
+                    "xaid" => $asset_id, //XferAsset ID
+                ),
+            );
+        }else if($transaction_type=="opt-out"){
+            $transaction=array(
+                "txn" => array(
+                    "type" => "axfer", //Tx Type
+                    "arcv" => $key_id, //AssetReceiver
+                    "xaid" => $asset_id, //XferAsset ID
+                    "aclose" => $key_id, //AssetReceiver
+                ),
+            );
         }
         
+        $txn_params=array(
+            "txn" => array(
+                    "fee" => $fee, //Fee
+                    "fv" => $fv, //First Valid
+                    "gen" => $genesis_id, // GenesisID
+                    "gh" => $genesis_hash, //Genesis Hash
+                    "lv" => $lv, //Last Valid
+                    "snd" => $from, //Sender
+                ),
+        );
+
+        if($transaction_type=="opt-in" OR $transaction_type=="opt-out"){
+            $txn_params['txn']['snd']=$key_id;
+        }
+    
+        //Merge transaction with params
+        $transaction['txn']=array_merge($txn_params["txn"],$transaction["txn"]);
+
         //echo $wallet->json_print(json_encode($transaction)); exit();
         
+        $transaction=$algorand_transactions->encode($transaction);
+
+        //Sign Transaction
         $wallet_token=$wallet->token($wallet_id,$wallet_password);
+        $txn_signed=$wallet->sign($wallet_token,$wallet_password,$transaction);
+
+        #Broadcasts a raw transaction to the network.
+        $params['transaction']=$txn_signed;
+        $return=$algod->post("v2","transactions",$params);
         
-        $return=$wallet->send($wallet_token,$wallet_password,$from,$transaction);
         
         if($return['response']){
             echo $wallet->json_print($return['response']);

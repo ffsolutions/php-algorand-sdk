@@ -38,6 +38,10 @@ $(document).ready(function(){
           wallet.asset_optin();
       });
 
+      $("#asset_optout").click(function(){
+          wallet.asset_optout();
+      });
+
       $("#send, #send_asset").click(function(){
           wallet.send();
       });
@@ -271,11 +275,12 @@ class Wallet {
 
       asset_optin() {
           $.post(this.url, {
-                action: "asset_optin",
+                action: "send",
                 wallet_id: $("#wallets option:selected").val(),
                 key_id: $("#keys option:selected").val(),
                 wallet_password: $("#wallet_password").val(),
                 asset_id: $("#asset_id").val(),
+                transaction_type: "opt-in",
 
               }).done(function( data ) {
                 $("#wallet_output").val(data);
@@ -283,6 +288,22 @@ class Wallet {
                 console.log(obj);
           });
         }
+
+      asset_optout() {
+          $.post(this.url, {
+                action: "send",
+                wallet_id: $("#wallets option:selected").val(),
+                key_id: $("#keys option:selected").val(),
+                wallet_password: $("#wallet_password").val(),
+                asset_id: $("#asset_id").val(),
+                transaction_type: "opt-out",
+
+              }).done(function( data ) {
+                $("#wallet_output").val(data);
+                var obj = $.parseJSON(data);
+                console.log(obj);
+          });
+        }    
 
      meta_hash() {
         $.post(this.url, {

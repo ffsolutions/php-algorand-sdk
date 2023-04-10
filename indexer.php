@@ -1,7 +1,8 @@
 <?php
 require_once 'sdk/algorand.php';
 
-$algorand_indexer = new Algorand_indexer('',"localhost",8980);
+$algorand_indexer = new Algorand("indexer","{indexer-token}","localhost",8980);
+//$algorand_indexer = new Algorand("indexer","{pure-stake-token}","mainnet-algorand.api.purestake.io/idx2",0,true); //true for External PureStake 
 
 $algorand_indexer->debug(1);
 //algorand->setSSL('/home/felipe/certificate.cert'); //Optional
@@ -9,7 +10,7 @@ $algorand_indexer->debug(1);
 #Just uncomment to try all avaliable functions
 
 #Get health, Returns 200 if healthy.
-$return=$algorand_indexer->get("health");
+//$return=$algorand_indexer->get("health");
 
 #Search for accounts.
 /*
@@ -50,10 +51,10 @@ $query=http_build_query(array(
     "tx-type" => "pay", //enum (pay, keyreg, acfg, axfer, afrz, appl)
     "txid" => "", //string
 ));
-
-//$return=$algorand_indexer->get("v2","accounts","{account-id}","transactions?".$query);
-//$return=$algorand_indexer->get("v2","accounts","NJCLL5UPIZKXTHQ42M52B72DSO3PATJ2DEQOZQXJMWFMZPDLGUYV3PBJ5Q","transactions?".$query);
 */
+//$return=$algorand_indexer->get("v2","accounts","{account-id}","transactions?".$query);
+//$return=$algorand_indexer->get("v2","accounts","2QAXTOHQJQH6I4FM6RWUIISXKFJ2QA4NVWELMIJ5XAKZB4N4XIEX7F5KPU","transactions?".$query);
+
 
 #Search for applications
 /*

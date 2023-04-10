@@ -27,10 +27,6 @@ $(document).ready(function(){
           wallet.info();
       });
 
-      $("#transaction_info").click(function(){
-          wallet.transaction_info();
-      });
-
       $("#key_generate").click(function(){
           wallet.key_generate();
       });
@@ -127,7 +123,6 @@ class Wallet {
               wallet_password: $("#wallet_password").val(),
               wallet_id: $("#wallets option:selected").val(),
             }).done(function( data ) {
-              alert(data);
               $("#wallet_output").val(data);
               wallet.list_keys();
               var obj = $.parseJSON(data);
