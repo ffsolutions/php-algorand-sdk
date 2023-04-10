@@ -1,0 +1,125 @@
+body{
+  background-color: #FFFFFF;
+  font-size: 16px;
+}
+a:link, a:visited{
+  color: #003399;
+  text-decoration: none;
+}
+a:hover{
+  color: #0066cc;
+  text-decoration: none;
+}
+
+#explorer{
+  position: relative;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  clear: both;
+  float: none;
+}
+#top{
+  float: node;
+  width: 100%;
+  text-align: center;
+}
+#left{
+  float: left;
+  width: 50%;
+}
+#right{
+  float: right;
+  width: 50%;
+}
+#bottom{
+  float: none;
+  width: 100%;
+  clear: both;
+}
+#explorer h1{
+  font-family: fantasy;
+  font-size: 38px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+#explorer h2{
+  font-family: fantasy;
+  font-size: 28px;
+  text-align: left;
+  font-family: cursive;
+}
+
+#top textarea{
+  width: 100%;
+  height: 250px;
+}
+
+#keyword{
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+#explorer_output{
+  width: 100%;
+  height: 170px;
+}
+#limit, #minround, #maxround{
+  width: 80px;
+}
+
+#results{
+  font-family: Arial;
+  overflow: hidden;
+  clear: both;
+}
+#results ul{
+  padding: 0px;
+}
+#results ul li{
+  list-style: none;
+  border: 1px solid #CCC;
+  width: calc(50% - 2px);
+  float: left;
+}
+#results .full{
+  width: calc(100% - 2px);
+}
+#results ul li h5{
+  font-size: 16px;
+  text-align: left;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-weight: normal;
+  margin: 10px;
+}
+#results ul li p{
+  margin: 10px;
+}
+#transactions, #blocks{
+  font-size: 11px;
+  font-family: Arial;
+}
+#transactions ul, #blocks ul{
+  padding: 0px;
+  border-top: 1px solid #CCC;
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+#blocks ul{
+  flex-wrap: wrap;
+}
+#transactions ul li, #blocks ul li{
+  list-style: none;
+  padding: 10px;
+  border-bottom: 1px solid #CCC;
+  width: 100%;
+}
+#transactions ul li p, #blocks ul li p{
+  margin: 0px;
+}
+
+#reload-buttom{
+  float: left;
+}

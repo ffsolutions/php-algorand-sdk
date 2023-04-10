@@ -1,0 +1,57 @@
+body{
+  background-color: #FFFFFF;
+  font-size: 16px;
+
+}
+#wallet{
+  position: relative;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  clear: both;
+  float: none;
+}
+#wallet #left{
+  float: left;
+  width: 50%;
+}
+#wallet #right{
+  float: right;
+  width: 50%;
+}
+#wallet h1{
+  font-family: fantasy;
+  font-size: 38px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+#wallet h2{
+  font-family: fantasy;
+  font-size: 28px;
+  text-align: left;
+  font-family: cursive;
+}
+
+#wallet select{
+  width: 90%;
+  height: 120px;
+}
+
+#wallet #left input[type=text], #wallet #left input[type=password]{
+  width: 45%;
+}
+
+#wallet #right textarea{
+  width: 100%;
+  height: 250px;
+}
+
+#wallet #right input[type=text]{
+  width: 100%;
+}
+
+#transaction_id{
+  width: 80% !important;
+}

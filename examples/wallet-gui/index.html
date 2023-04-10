@@ -1,0 +1,58 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+<title>Algorand Wallet PHP</title>
+</head>
+
+<body>
+    <main id="wallet">
+          <h1>Algorand Wallet PHP</h1>
+          <div id="left">
+              <h2>Wallets</h2>
+              <select id="wallets" multiple>
+
+              </select>
+              <br><br>
+              <input type="password" id="wallet_password" placeholder="password">
+              <input type="text" id="wallet_name" placeholder="wallet name">
+
+              <br>
+              <br>
+              <input type="button" id="wallet_info" value="Info">
+              <input type="button" id="wallet_create" value="Create">
+              <input type="button" id="wallet_rename" value="Rename">
+              <input type="button" id="wallet_load_keys" value="Load Keys">
+
+              <h2>Keys</h2>
+
+              <select id="keys" multiple>
+
+              </select>
+              
+              <br><br>
+              <input type="button" id="key_generate" value="Generate">
+              <input type="button" id="key_balance" value="Balance">
+              <input type="button" id="key_delete" value="Delete">
+              <input type="button" id="key_copy" value="Copy Key">
+          </div>
+          <div id="right">
+              <h2>Send</h2>
+              To<br>
+              <input type="text" id="to" placeholder="Key">
+              <br><br>
+              Note<br>
+              <input type="text" id="note" placeholder="Note">
+              <br><br>
+              Amount<br>
+              <input type="number" id="amount" placeholder="microAlgos"> <input type="button" id="send" value="Send">
+              <h2>Output</h2>
+              <textarea id="wallet_output"></textarea>
+              <input type="text" id="tmp" value="">
+          </div>
+    </main>
+</body>
+</html>
