@@ -117,7 +117,7 @@ switch ($action) {
                     ),
         );
 
-        $transaction=$algorand_transaction->encode($transaction);
+        $transaction=$algorand_transactions->encode($transaction);
 
         //Sign Transaction
         $wallet_token=$wallet->token($wallet_id,$wallet_password);
@@ -126,6 +126,14 @@ switch ($action) {
         #Broadcasts a raw transaction to the network.
         $params['transaction']=$txn_signed;
         $return=$algod->post("v2","transactions",$params);
+        
+        
+        if($return['response']){
+            echo $wallet->json_print($return['response']);
+        }
+        if($return['message']){
+            echo $wallet->json_print($return['message']);
+        }
 
         /*
           Array
@@ -136,7 +144,6 @@ switch ($action) {
           )
         */
 
-        echo $wallet->json_print($return['response']);
 
         
         exit();
